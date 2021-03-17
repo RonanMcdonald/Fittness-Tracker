@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500&display=swap");
+.navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 15px;
+}
+
+.navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation li {
+  display: inline-block;
+  padding: 7px 22px;
+  font-size: 1.6em;
+  letter-spacing: 0.05rem;
+}
+
+.navigation li:first-child {
+  margin-right: 20px;
+}
+
+.navigation a {
+  color: white;
+}
+
+.navigation a:hover {
+  cursor: pointer;
+}
+
+.navigation .logo {
+  width: 175px;
+}
+
+.navigation .logo img {
+  width: 100%;
+  height: 100%;
+}
+
+html, body {
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-size: 1rem;
+  letter-spacing: 0.02rem;
+}
+
+body {
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  margin: 0;
+  padding-bottom: 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.375;
+  margin: 1.5rem 0 0.65rem 0;
+}
+
+h3 {
+  font-size: 2rem;
+  line-height: 1.25;
+  margin: 1.5rem 0 1.5rem 0;
+}
+
+h4 {
+  font-size: 1rem;
+  margin: 1.5rem 0 0;
+  font-weight: normal;
+}
+
+p {
+  margin: 0 0 1.5rem;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  -ms-hyphenate-limit-lines: 1;
+  -webkit-hyphenate-limit-lines: 1;
+  -ms-hyphenate-limit-chars: 6 3 2;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+p a {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), color-stop(50%, currentcolor));
+  background-image: linear-gradient(to bottom, transparent 50%, currentcolor 50%);
+  background-repeat: repeat-x;
+  background-size: 1px 1px;
+  background-position: 0 0.95em;
+}
+
+aside,
+figcaption,
+footer {
+  font-size: 0.875rem;
+}
+
+figcaption p {
+  max-width: 30em;
+}
+
+h1,
+h2 {
+  max-width: 9em;
+}
+
+.u-emphasis {
+  font-weight: bold;
+}
+
+body, html {
+  background-color: white;
+}
+
+h1, h2 {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+.sidebar {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 100vh;
+}
+
+.goal-tracker {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.goal-tracker .goal-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.goal-tracker .goal-top .dropdown-toggle img {
+  width: 100%;
+  height: 100%;
+}
+
+.goal-tracker:nth-child(2) {
+  margin: 15px 0;
+  padding: 15px 0;
+  border-top: black 1px solid;
+  border-bottom: black 1px solid;
+}
+
+.goal-container {
+  width: 300px;
+  margin: 8px 0;
+}
+
+.goal-container .text-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.goal-container .progress-bar {
+  border: 1px solid black;
+  border-radius: 8px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.goal-container .progress-bar .inner {
+  min-height: 100%;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: transparent;
+}
+/*# sourceMappingURL=main.css.map */
