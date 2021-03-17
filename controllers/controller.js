@@ -7,7 +7,8 @@ exports.index = async (req, res) => {
     await db.getAllGoals().then(data => {
         res.render('index', {
             'activeGoals': data.filter(goal => goal.isComplete === false),
-            'completedGoals': data.filter(goal => goal.isComplete === true)
+            'completedGoals': data.filter(goal => goal.isComplete === true),
+            'test': "200"
         })
         console.log("data: ", data);
     })

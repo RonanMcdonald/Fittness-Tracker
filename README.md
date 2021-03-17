@@ -1,6 +1,5 @@
-# WPD2_CW1
 # Fitness Tracker
-# Ronan Mcdonald
+## WPD2_CW1 Ronan Mcdonald
 
 ## Run
 To run the application as a developer, run:

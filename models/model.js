@@ -35,7 +35,6 @@ class pList {
             current: 6,
             isComplete: false
         });
-        
 
         // Completed tasks
         this.db.insert({
@@ -56,6 +55,14 @@ class pList {
             current: 7,
             isComplete: true
         });
+
+        // // Achievements
+        // this.db.insert({
+        //     name: 'Drink',
+        //     goal: 7,
+        //     current: 7,
+        //     isComplete: true
+        // });
     }
 
     getAllGoals() {

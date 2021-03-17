@@ -41,7 +41,9 @@
             {{/activeGoals}}
         </div>
 
+        
         <!-- Achievements -->
+        <!-- IMPLEMENT LATER
         <div class="goal-tracker">
             <div class="goal-top">
                 <h1>Achievements</h1>
@@ -49,7 +51,7 @@
                     <img src="../style/img/icons/drop-arrow.svg" alt="">
                 </div>
             </div>
-            {{#goals}}
+            {{#achievements}}
             <div class="goal-container">
                 <div class="text-wrapper">
                     <div class="g-i-name"><h2>{{name}}</h2></div>
@@ -59,8 +61,9 @@
                     <div class="inner"></div>
                 </div>
             </div>
-            {{/goals}}
+            {{/achievements}}
         </div>
+        -->
 
         <!-- Completed Goals -->
         <div class="goal-tracker">
@@ -72,6 +75,7 @@
             </div>
             {{#completedGoals}}
             <div class="goal-container">
+                <div class="g-total"><h2>{{test}}</h2></div>
                 <div class="text-wrapper">
                     <div class="g-i-name"><h2>{{name}}</h2></div>
                     <div class="g-i-progress"><h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2></div>
