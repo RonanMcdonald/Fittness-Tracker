@@ -1,6 +1,7 @@
 const modelDAO = require('../models/model');
 const db = new modelDAO();
 
+// Time object: enables getting of current time/dates
 const moment = require('moment');
 
 db.init();
@@ -23,7 +24,6 @@ exports.dashboard = async (req, res) => {
             'nextWeek': currentWeek + 1,
             'previousWeek': currentWeek - 1,
         })
-        // console.log("data: ", data);
     })
 }
 
@@ -34,6 +34,7 @@ exports.deleteEntry = async function(req, res) {
     res.redirect(req.baseUrl + '/dashboard/' + req.params.currentWeek);
 }
 
+// Add goal
 exports.addGoal = async (req, res) => { 
     res.render('new_goal');
 }
@@ -68,7 +69,13 @@ exports.decrement = async function(req, res) {
 exports.increment = async function(req, res) {
     const id = req.params._id;
     const goal = await db.getGoalById(id);
-    await db.updateIncrement(goal._id, goal.current);
+    
+    // NOT WORKING, NEED TO UPDATE: WAS SUPPOSED TO BE BOUNDRY HANDLING
+    if (goal.current+1 == goal.goal) {
+        await db.updateIncrement(goal._id, goal.current);
+    } else {
+        await db.updateIncrement(goal._id, goal.current);
+    }
     res.redirect(req.baseUrl + '/dashboard/' + req.params.currentWeek);
 }
 
@@ -118,24 +125,21 @@ exports.retractCompleteTask = async function(req, res) {
 
     db.retractCompleteTask(task._id);
     console.log("Controller: retractCompleteTask");
-    res.redirect(req.baseUrl + '/');
+    res.redirect(req.baseUrl + '/dashboard/' + req.params.currentWeek);
 }
 
 exports.nextWeek = async function (req, res) { 
     const currentWeek = Number(req.params.currentWeek)
-
-    const oldWeek = currentWeek;
     const newWeek = currentWeek + 1;
 
     res.redirect(req.baseUrl + '/dashboard/' + newWeek);
 }
 
-
 exports.prevWeek = async function (req, res) { 
     const currentWeek = Number(req.params.currentWeek)
-
-    const oldWeek = currentWeek;
     const newWeek = currentWeek - 1;
 
     res.redirect(req.baseUrl + '/dashboard/' + newWeek);
 }
+
+

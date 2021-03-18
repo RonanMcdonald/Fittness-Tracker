@@ -4,9 +4,10 @@
     {{>partials/head}}
 </head>
 <body>
-    <div class="prev-goal-name">
-        <p>Previous Goal Name: {{}}</p>
-    </div>
+    {{>partials/navigation}}
+    <!-- <div class="prev-goal-name">
+        <p>Previous Goal Name: {{name}}</p>
+    </div> -->
     <form method="post" role="form">
         <div class="form-group">
             <label for="name">New goal name</label>

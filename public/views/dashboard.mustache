@@ -29,7 +29,7 @@
                     <div class="progress-bar">
                         <div class="inner"></div>
                     </div>
-                    <div class="g-remove"><a href="/delete/{{_id}}">Remove</a></div>
+                    <div class="g-remove"><a href="/delete/{{_id}}/{{currentWeek}}">Remove</a></div>
                 </div>
                 {{/activePersistentGoals}}
                 <div class="add-goal-wrapper">
@@ -39,31 +39,7 @@
                     <p>Set your own long-term goals!</p>
                 {{/activePersistentGoals}}
             </div>
-    
-            
-            <!-- Achievements -->
-            <!-- IMPLEMENT LATER
-            <div class="goal-tracker">
-                <div class="goal-top">
-                    <h1>Achievements</h1>
-                    <div class="dropdown-toggle">
-                        <img src="../style/img/icons/drop-arrow.svg" alt="">
-                    </div>
-                </div>
-                {{#achievements}}
-                <div class="goal-container">
-                    <div class="text-wrapper">
-                        <div class="g-i-name"><h2>{{name}}</h2></div>
-                        <div class="g-i-progress"><h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2></div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="inner"></div>
-                    </div>
-                </div>
-                {{/achievements}}
-            </div>
-            -->
-    
+
             <!-- Completed Goals -->
             <div class="goal-tracker">
                 <div class="goal-top">
@@ -84,7 +60,7 @@
                     <div class="progress-bar">
                         <div class="inner"></div>
                     </div>
-                    <div class="g-remove"><a href="/delete/{{_id}}">Remove</a></div>
+                    <div class="g-remove"><a href="/delete/{{_id}}/{{currentWeek}}">Remove</a></div>
                 </div>
                 <script> // Get total completed tasks
                     $("#total").text(parseInt($('#total').text(), 10) + 1) 
@@ -105,7 +81,7 @@
         <div class="main-bar">
             <div class="top-bar">
                 <div class="today-btn">
-                    <a href="">Today</a>
+                    <a href="/">Today</a>
                 </div>
                 <div class="page-change-btn">
                     <a href="/prevWeek/{{currentWeek}}"><</a>
@@ -130,7 +106,7 @@
                         {{#activeRecurring}}
                         <li>
                             <div class="check-circle">
-                                <a href="/complete/{{_id}}"><img src="../style/img/icons/circle-def.png" width="100" height="100"></a>
+                                <a href="/complete/{{_id}}/{{currentWeek}}"><img src="../style/img/icons/circle-def.png" width="100" height="100"></a>
                             </div>
                             <div class="task"><p>{{name}}</p></div>
                             <div class="edit-buttons">
@@ -147,12 +123,12 @@
                         {{#completedRecurring}}
                         <li>
                             <div class="check-circle">
-                                <a href="/retractCompleteTask/{{_id}}"><img src="../style/img/icons/circle-check.png" width="100" height="100"></a>
+                                <a href="/retractCompleteTask/{{_id}}/{{currentWeek}}"><img src="../style/img/icons/circle-check.png" width="100" height="100"></a>
                             </div>
                             <div class="task checked"><p>{{name}}</p></div>
                             <div class="edit-buttons">
-                                <a href="/editTask/{{_id}}">Edit</a>
-                                <div class="g-remove"><a href="/delete/{{_id}}">Delete</a></div>
+                                <a href="/editTask/{{_id}}/{{currentWeek}}">Edit</a>
+                                <div class="g-remove"><a href="/delete/{{_id}}/{{currentWeek}}">Delete</a></div>
                             </div>
                         </li>
                         {{/completedRecurring}}

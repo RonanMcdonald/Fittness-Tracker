@@ -38,7 +38,7 @@ class pList {
                 name: "Swim",
                 isComplete: false,
                 isPersistent: true,
-                goal: 12,
+                goal: 5,
                 current: 4,
                 weekNumber: null
             },
@@ -139,7 +139,7 @@ class pList {
 
     deleteEntry(id) {
         this.db.remove({ _id: id }, { multi: false }, (err, numOfDocsRemoved) => {
-            err ? console.log(`Error deleting goal: ${id}`) : console.log(`${numOfDocsRemoved} Goal removed from db`)
+            err ? console.log(`Error deleting entry: ${id}`) : console.log(`${numOfDocsRemoved} Entry removed from database`)
         })
     }
     
@@ -155,7 +155,7 @@ class pList {
 
         console.log('entry created', entry);
         this.db.insert(entry, function(err, doc) {
-            err ? onsole.log('Error inserting document', subject) : console.log('document inserted into the database', doc);
+            err ? onsole.log('Error inserting object', subject) : console.log('object inserted in database', doc);
         })
     }
 
@@ -172,14 +172,14 @@ class pList {
     // Decrement
     updateDecrement(id, current) {
         this.db.update({ _id: id }, { $set: { current: (current - 1) }}, (err, numUpdated) => {
-            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
+            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in database`)
         });
     }
 
     // Increment
-    updateIncrement(id, current) {
+    updateIncrement(id, current, isComplete) {
         this.db.update({ _id: id }, { $set: { current: (current + 1) }}, (err, numUpdated) => {
-            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
+            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in database`)
         });
     }
 
@@ -194,25 +194,25 @@ class pList {
 
         console.log('entry created', entry);
         this.db.insert(entry, function(err, doc) {
-            err ? onsole.log('Error inserting document', subject) : console.log('document inserted into the database', doc);
+            err ? onsole.log('Error inserting object', subject) : console.log('object inserted in database', doc);
         })
     }
 
     editTask(id, name) {
         this.db.update({ _id: id }, { $set: { name: name }}, (err, numUpdated) => {
-            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
+            err ? console.log(`Error updating task: ${id}`) : console.log(`${numUpdated} task updated in database`)
         });
     }
 
     completeTask(id) {
         this.db.update({ _id: id }, { $set: { isComplete: true }}, (err, numUpdated) => {
-            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
+            err ? console.log(`Error updating task: ${id}`) : console.log(`${numUpdated} task updated in database`)
         });
     }
 
     retractCompleteTask(id) {
         this.db.update({ _id: id }, { $set: { isComplete: false }}, (err, numUpdated) => {
-            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
+            err ? console.log(`Error updating task: ${id}`) : console.log(`${numUpdated} task updated in database`)
         });
     }
 }

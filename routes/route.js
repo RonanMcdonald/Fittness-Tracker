@@ -20,14 +20,16 @@ router.post('/submit-form/:currentWeek', controller.addTask)
 // Edit Task
 router.get('/editTask/:_id/:currentWeek', controller.editTask);
 router.post('/editTask/:_id/:currentWeek', controller.editTaskPost);
-
 // Complete task
-router.get('/complete/:_id', controller.completeTask);
-router.get('/retractCompleteTask/:_id', controller.retractCompleteTask);
+router.get('/complete/:_id/:currentWeek', controller.completeTask);
+router.get('/retractCompleteTask/:_id/:currentWeek', controller.retractCompleteTask);
+// Switch week
+router.get('/nextWeek/:currentWeek', controller.nextWeek); // Next week
+router.get('/prevWeek/:currentWeek', controller.prevWeek); // Prev week
+router.get('/currWeek', controller.currentWeek); // Current week
 
-// Next week
-router.get('/nextWeek/:currentWeek', controller.nextWeek);
-router.get('/prevWeek/:currentWeek', controller.prevWeek);
+
+
 
 // --- Errors --- //
 // 404 - Page not found
