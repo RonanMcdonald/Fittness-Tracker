@@ -25,8 +25,8 @@ class pList {
         });
         this.db.insert({
             name: 'Eat',
-            goal: 12,
-            current: 7,
+            goal: 4,
+            current: 2,
             isComplete: false
         });
         this.db.insert({
@@ -45,8 +45,8 @@ class pList {
         });
         this.db.insert({
             name: 'Walk',
-            goal: 12,
-            current: 12,
+            goal: 8,
+            current: 9,
             isComplete: true
         });
         this.db.insert({
@@ -63,6 +63,30 @@ class pList {
         //     current: 7,
         //     isComplete: true
         // });
+    }
+
+    addGoal(goal) {
+        var entry = {
+            name: goal.name,
+            goal: goal.goal,
+            current: 0,
+            isComplete: false,
+        }
+
+        console.log('entry created', entry);
+        this.db.insert(entry, function(err, doc) {
+            if (err) {
+             console.log('Error inserting document', subject);
+            } else {
+                console.log('document inserted into the database', doc);
+            }
+        })
+    }
+
+    updateGoal(goal) {
+        this.db.update({ _id: goal.id }, {$set: goal}, {}, function () {
+
+        })
     }
 
     getAllGoals() {
@@ -89,6 +113,26 @@ class pList {
         });
 
         console.log("COMPLETED GOALS REACHED");
+    }
+
+    updateDecrement(id, current) {
+        this.db.update({ _id: id }, { $set: { current: (current - 1) }}, (err, numUpdated) => {
+            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
+        });
+    }
+
+    updateIncrement(id, current) {
+        this.db.update({ _id: id }, { $set: { current: (current + 1) }}, (err, numUpdated) => {
+            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
+        });
+    }
+
+    getGoalById(id) {
+        return new Promise((resolve, reject) => {
+            this.db.findOne({ _id: id }, (err, entry) => {
+                err ? reject(err) : resolve(entry)
+            })
+        })
     }
 }
 

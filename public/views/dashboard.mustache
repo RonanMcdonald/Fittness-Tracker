@@ -22,20 +22,27 @@
             <div class="goal-top">
                 <h1>Your Goals</h1>
                 <div class="dropdown-toggle">
-                    <img src="../style/img/icons/drop-arrow.svg" alt="">
+                    <!-- <img src="../style/img/icons/drop-arrow.svg" alt=""> -->
                 </div>
             </div>
             {{#activeGoals}}
             <div class="goal-container">
                 <div class="text-wrapper">
                     <div class="g-i-name"><h2>{{name}}</h2></div>
-                    <div class="g-i-progress"><h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2></div>
+                    <div class="g-i-progress">
+                        <h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2>
+                        <a href="/decrement/{{_id}}"><img class="decrement" src="../style/img/icons/drop-arrow.svg" alt=""></a>
+                        <a href="/increment/{{_id}}"><img class="increment" src="../style/img/icons/drop-arrow.svg" alt=""></a>
+                    </div>
                 </div>
                 <div class="progress-bar">
                     <div class="inner"></div>
                 </div>
             </div>
             {{/activeGoals}}
+            <div class="add-goal-wrapper">
+                <a href="/new">Add Goal</a>
+            </div>
             {{^activeGoals}}
                 <p>Set your own goals!</p>
             {{/activeGoals}}
@@ -70,12 +77,12 @@
             <div class="goal-top">
                 <h1>Completed Goals</h1>
                 <div class="dropdown-toggle">
-                    <img src="../style/img/icons/drop-arrow.svg" alt="">
+                    <!-- <img src="../style/img/icons/drop-arrow.svg" alt=""> -->
                 </div>
             </div>
+            <div class="g-total"><h2>Total Completed:</h2> <h2 id="total">0</h2></div>
             {{#completedGoals}}
             <div class="goal-container">
-                <div class="g-total"><h2>{{test}}</h2></div>
                 <div class="text-wrapper">
                     <div class="g-i-name"><h2>{{name}}</h2></div>
                     <div class="g-i-progress"><h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2></div>
@@ -84,6 +91,9 @@
                     <div class="inner"></div>
                 </div>
             </div>
+            <script> // Get total completed tasks
+                $("#total").text(parseInt($('#total').text(), 10) + 1) 
+            </script>
             {{/completedGoals}}
         </div>
     </div>

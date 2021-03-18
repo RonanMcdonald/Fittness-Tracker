@@ -181,6 +181,15 @@ h2 {
   height: 100%;
 }
 
+.goal-tracker .g-total {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .goal-tracker:nth-child(2) {
   margin: 15px 0;
   padding: 15px 0;
@@ -200,6 +209,33 @@ h2 {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.goal-container .g-i-progress {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.goal-container .g-i-progress h2 {
+  margin: 0 8px;
+}
+
+.goal-container .g-i-progress .increment, .goal-container .g-i-progress .decrement {
+  margin-bottom: -2px;
+}
+
+.goal-container .g-i-progress .increment {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.goal-container .g-i-progress .decrement {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .goal-container .progress-bar {

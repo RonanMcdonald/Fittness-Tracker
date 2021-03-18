@@ -16,11 +16,11 @@ h2 {font-size: 1.5em; font-weight: 400;}
 }
 
 .goal-tracker {
+    width: fit-content;
     .goal-top {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         .dropdown-toggle {
             img {
                 width: 100%;
@@ -28,7 +28,10 @@ h2 {font-size: 1.5em; font-weight: 400;}
             }
         }
     }
-    width: fit-content;
+    .g-total {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 .goal-tracker:nth-child(2) {
@@ -45,6 +48,17 @@ h2 {font-size: 1.5em; font-weight: 400;}
     .text-wrapper {
         display: flex;
         justify-content: space-between;
+    }
+
+    .g-i-progress {
+        display: flex;
+        align-items: center;
+        h2 {margin: 0 8px;}
+        .increment, .decrement {
+            margin-bottom: -2px;
+        }
+        .increment {transform: rotate(-90deg)}
+        .decrement {transform: rotate(90deg)}
     }
 
     .progress-bar {
