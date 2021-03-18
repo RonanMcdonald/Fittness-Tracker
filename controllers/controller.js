@@ -66,8 +66,6 @@ exports.increment = async function(req, res) {
     res.redirect(req.baseUrl + '/dashboard');
 }
 
-
-
 // Add Task
 exports.addTask = async function(req, res) {
     if (!req.body.name) {
