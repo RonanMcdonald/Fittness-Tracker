@@ -17,8 +17,12 @@ router.get('/delete/:_id', controller.deleteEntry); // Delete
 router.post('/submit-form', controller.addTask)
 
 // Edit Task
-router.get('/editTask', controller.editTask);
-router.post('/editTask', controller.editTaskPost);
+router.get('/editTask/:_id', controller.editTask);
+router.post('/editTask/:_id', controller.editTaskPost);
+
+// Complete task
+router.get('/complete/:_id', controller.completeTask);
+router.get('/retractCompleteTask/:_id', controller.retractCompleteTask);
 
 // --- Errors --- //
 // 404 - Page not found

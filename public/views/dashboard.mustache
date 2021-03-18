@@ -121,7 +121,7 @@
             <div class="main-wrapper">
                 <form method="POST" action="/submit-form">
                     <input type="text" id="name" name="name" placeholder="Enter the goal name">
-                    <input type="submit" />
+                    <input type="submit" value="Submit"/>
                 </form>
 
                 <div class="list-wrapper">
@@ -129,17 +129,27 @@
                         {{#activeRecurring}}
                         <li>
                             <div class="check-circle">
-                                <a href="">
-                                    <img src="../style/img/icons/circle-def.png" width="100" height="100">
-                                </a>
+                                <a href="/complete/{{_id}}"><img src="../style/img/icons/circle-def.png" width="100" height="100"></a>
                             </div>
                             <div class="task">{{name}}</div>
                             <div class="edit-buttons">
-                                <a href="/editTask">Edit</a>
+                                <a href="/editTask/{{_id}}">Edit</a>
                                 <div class="g-remove"><a href="/delete/{{_id}}">Delete</a></div>
                             </div>
                         </li>
                         {{/activeRecurring}}
+                        {{#completedRecurring}}
+                        <li>
+                            <div class="check-circle">
+                                <a href="/retractCompleteTask/{{_id}}"><img src="../style/img/icons/circle-check.png" width="100" height="100"></a>
+                            </div>
+                            <div class="task checked"><p>{{name}}</p></div>
+                            <div class="edit-buttons">
+                                <a href="/editTask/{{_id}}">Edit</a>
+                                <div class="g-remove"><a href="/delete/{{_id}}">Delete</a></div>
+                            </div>
+                        </li>
+                        {{/completedRecurring}}
                     </ul>
                 </div>
         </div>

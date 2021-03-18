@@ -60,6 +60,12 @@ class pList {
             isPersistent: false,
             weekNumber: 0
         });
+        this.db.insert({
+            name: 'Eat',
+            isComplete: true,
+            isPersistent: false,
+            weekNumber: 0
+        });
 
         // this.db.insert({
         //     name: 'Swim',
@@ -130,8 +136,6 @@ class pList {
         });
     }
 
-    
-
     // --- TASKS ---- //
     addTask(task) {
         var entry = {
@@ -147,8 +151,22 @@ class pList {
         })
     }
 
-    editTask(task) {
-        console.log("edit");
+    editTask(id, name) {
+        this.db.update({ _id: id }, { $set: { name: name }}, (err, numUpdated) => {
+            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
+        });
+    }
+
+    completeTask(id) {
+        this.db.update({ _id: id }, { $set: { isComplete: true }}, (err, numUpdated) => {
+            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
+        });
+    }
+
+    retractCompleteTask(id) {
+        this.db.update({ _id: id }, { $set: { isComplete: false }}, (err, numUpdated) => {
+            err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
+        });
     }
 }
 

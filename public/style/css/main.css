@@ -323,6 +323,11 @@ h2 {
   margin: 0;
 }
 
+.list-wrapper ul p {
+  padding: 0;
+  margin: 0;
+}
+
 .list-wrapper ul li {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -368,5 +373,13 @@ h2 {
 
 .list-wrapper ul li .edit-buttons a:nth-child(1) {
   margin-right: 10px;
+}
+
+.list-wrapper ul .checked p {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.list-wrapper ul .checked {
+  text-decoration: line-through;
 }
 /*# sourceMappingURL=main.css.map */

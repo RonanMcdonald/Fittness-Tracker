@@ -14,8 +14,9 @@ exports.dashboard = async (req, res) => {
     await db.getAllGoals().then(data => {
         res.render('dashboard', {
             'activePersistentGoals': data.filter(goal => goal.isComplete === false && goal.isPersistent === true),
-            'completedPersistentGoals': data.filter(goal => goal.isComplete === true),
-            'activeRecurring': data.filter(goal => goal.isComplete === false && goal.isPersistent === false)
+            'completedPersistentGoals': data.filter(goal => goal.isComplete === true && goal.isPersistent === true),
+            'activeRecurring': data.filter(goal => goal.isComplete === false && goal.isPersistent === false),
+            'completedRecurring': data.filter(goal => goal.isComplete === true && goal.isPersistent === false)
         })
         // console.log("data: ", data);
     })
@@ -27,7 +28,6 @@ exports.deleteEntry = async function(req, res) {
     await db.deleteEntry(id);
     res.redirect(req.baseUrl + '/dashboard');
 }
-
 
 exports.addGoal = async (req, res) => { 
     res.render('new_goal');
@@ -88,9 +88,28 @@ exports.editTask = async (req, res) => {
 }
 
 exports.editTaskPost = async function (req, res) { 
-    console.log("EDIT PAGE REACHED")
-    // const id = req.params._id;
-    // const goal = await db.getGoalById(id);
-    // await db.updateIncrement(goal._id, goal.current);
+    const id = req.params._id;
+    const task = await db.getGoalById(id);
+
+    const name = req.body.name;
+    
+    db.editTask(task._id, name); 
+    res.redirect(req.baseUrl + '/dashboard');
+}
+
+exports.completeTask = async function(req, res) {
+    const id = req.params._id;
+    const task = await db.getGoalById(id);
+
+    db.completeTask(task._id);
+    res.redirect(req.baseUrl + '/dashboard');
+}
+
+exports.retractCompleteTask = async function(req, res) {
+    const id = req.params._id;
+    const task = await db.getGoalById(id);
+
+    db.retractCompleteTask(task._id);
+    console.log("Controller: retractCompleteTask");
     res.redirect(req.baseUrl + '/dashboard');
 }
