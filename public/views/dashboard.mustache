@@ -22,8 +22,8 @@
                         <div class="g-i-name"><h2>{{name}}</h2></div>
                         <div class="g-i-progress">
                             <h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2>
-                            <a href="/decrement/{{_id}}"><img class="decrement" src="../style/img/icons/drop-arrow.svg" alt=""></a>
-                            <a href="/increment/{{_id}}"><img class="increment" src="../style/img/icons/drop-arrow.svg" alt=""></a>
+                            <a href="/decrement/{{_id}}/{{currentWeek}}"><img class="decrement" src="../style/img/icons/drop-arrow.svg" alt=""></a>
+                            <a href="/increment/{{_id}}/{{currentWeek}}"><img class="increment" src="../style/img/icons/drop-arrow.svg" alt=""></a>
                         </div>
                     </div>
                     <div class="progress-bar">
@@ -33,7 +33,7 @@
                 </div>
                 {{/activePersistentGoals}}
                 <div class="add-goal-wrapper">
-                    <a href="/new">Add Goal</a>
+                    <a href="/new/{{currentWeek}}">Add Goal</a>
                 </div>
                 {{^activePersistentGoals}}
                     <p>Set your own long-term goals!</p>
@@ -105,13 +105,14 @@
         <div class="main-bar">
             <div class="top-bar">
                 <div class="today-btn">
-                    <a href="today/{{_id}}">Today</a>
+                    <a href="">Today</a>
                 </div>
                 <div class="page-change-btn">
-                    <a href=""><</a>
-                    <a href="">></a>
+                    <a href="/prevWeek/{{currentWeek}}"><</a>
+                    <a href="/nextWeek/{{currentWeek}}">></a>
                 </div>
                 <div class="current-week-display">
+                    <p>Week {{currentWeek}}</p>
                 </div>
                 <div class="current-date-display">
                     
@@ -119,9 +120,9 @@
             </div>
 
             <div class="main-wrapper">
-                <form method="POST" action="/submit-form">
-                    <input type="text" id="name" name="name" placeholder="Enter the goal name">
-                    <input type="submit" value="Submit"/>
+                <form class="form-wrapper" method="POST" action="/submit-form/{{currentWeek}}">
+                    <input type="text" id="name" name="name" placeholder="What do you want to do this week?" autocomplete="off" autofocus>
+                    <input class="test" type="submit" value="Submit"/>
                 </form>
 
                 <div class="list-wrapper">
@@ -131,12 +132,17 @@
                             <div class="check-circle">
                                 <a href="/complete/{{_id}}"><img src="../style/img/icons/circle-def.png" width="100" height="100"></a>
                             </div>
-                            <div class="task">{{name}}</div>
+                            <div class="task"><p>{{name}}</p></div>
                             <div class="edit-buttons">
-                                <a href="/editTask/{{_id}}">Edit</a>
-                                <div class="g-remove"><a href="/delete/{{_id}}">Delete</a></div>
+                                <a href="/editTask/{{_id}}/{{currentWeek}}">Edit</a>
+                                <div class="g-remove"><a href="/delete/{{_id}}/{{currentWeek}}">Delete</a></div>
                             </div>
                         </li>
+                        {{/activeRecurring}}
+                        {{^activeRecurring}}
+                        <ul>
+                            <li><p class="empty-msg">No tasks found, enter them using the input above!</p></li>
+                        </ul>
                         {{/activeRecurring}}
                         {{#completedRecurring}}
                         <li>

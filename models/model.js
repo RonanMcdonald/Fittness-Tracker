@@ -17,69 +17,115 @@ class pList {
     }
 
     init() {
-        this.db.insert({
-            name: 'Run',
-            goal: 5,
-            current: 2,
-            isComplete: false,
-            isPersistent: true,
-        });
-        this.db.insert({
-            name: 'Eat',
-            goal: 4,
-            current: 2,
-            isComplete: false,
-            isPersistent: true,
-        });
-
-        this.db.insert({
-            name: 'Tennis',
-            goal: 5,
-            current: 5,
-            isComplete: true,
-            isPersistent: true,
-        });
-        this.db.insert({
-            name: 'Walk',
-            goal: 8,
-            current: 9,
-            isComplete: true,
-            isPersistent: true,
-        });
-
-        // Recurring
-        this.db.insert({
-            name: 'Run',
-            isComplete: false,
-            isPersistent: false,
-            weekNumber: 0
-        });
-        this.db.insert({
-            name: 'Eat',
-            isComplete: false,
-            isPersistent: false,
-            weekNumber: 0
-        });
-        this.db.insert({
-            name: 'Eat',
-            isComplete: true,
-            isPersistent: false,
-            weekNumber: 0
-        });
-
-        // this.db.insert({
-        //     name: 'Swim',
-        //     goal: 7,
-        //     current: 6,
-        //     isComplete: false
-        // });
-        // this.db.insert({
-        //     name: 'Drink',
-        //     goal: 7,
-        //     current: 7,
-        //     isComplete: true
-        // }); 
+        const names = [
+            { // Goals : Active
+                name: "Run",
+                isComplete: false,
+                isPersistent: true,
+                goal: 25,
+                current: 5,
+                weekNumber: null
+            },
+            {
+                name: "Drink",
+                isComplete: false,
+                isPersistent: true,
+                goal: 33,
+                current: 12,
+                weekNumber: null
+            },
+            {
+                name: "Swim",
+                isComplete: false,
+                isPersistent: true,
+                goal: 12,
+                current: 4,
+                weekNumber: null
+            },
+            { // Goals : Completed
+                name: "Dance",
+                isComplete: true,
+                isPersistent: true,
+                goal: 44,
+                current: 44,
+                weekNumber: null
+            },
+            {
+                name: "Eat",
+                isComplete: true,
+                isPersistent: true,
+                goal: 29,
+                current: 29,
+                weekNumber: null
+            },
+            {
+                name: "Wake early",
+                isComplete: true,
+                isPersistent: true,
+                goal: 22,
+                current: 22,
+                weekNumber: null
+            },
+            { // Tasks : Active
+                name: "Go swimming",
+                isComplete: false,
+                isPersistent: false,
+                goal: 0,
+                current: 0,
+                weekNumber: 11
+            },
+            {
+                name: "Do 20 push ups",
+                isComplete: false,
+                isPersistent: false,
+                goal: 0,
+                current: 0,
+                weekNumber: 12
+            },
+            {
+                name: "Go for a run",
+                isComplete: false,
+                isPersistent: false,
+                goal: 0,
+                current: 0,
+                weekNumber: 13
+            }, 
+            { // Tasks : Complete
+                name: "Eat healthy",
+                isComplete: true,
+                isPersistent: false,
+                goal: 0,
+                current: 0,
+                weekNumber: 11
+            },
+            {
+                name: "Dance",
+                isComplete: true,
+                isPersistent: false,
+                goal: 0,
+                current: 0,
+                weekNumber: 12
+            },
+            {
+                name: "Do 10 pull ups",
+                isComplete: true,
+                isPersistent: false,
+                goal: 0,
+                current: 0,
+                weekNumber: 13
+            }
+        ];
         
+        names.forEach(value => {
+            this.db.insert({
+                name: value.name, // task or goal name
+                isComplete: value.isComplete, // is complete check 
+                isPersistent: value.isPersistent, // true == goal | false == task
+                goal: value.goal, // goal occurence aim
+                current: value.current, // goal current progress
+                weekNumber: value.weekNumber // which week created
+            });
+        })
     }
 
     // Generic
@@ -114,9 +160,10 @@ class pList {
     }
 
     // Get all goals
-    getAllGoals() {
+    getAllGoals(weekNumber) {
         return new Promise((resolve, reject) => {
-            this.db.find({}).sort({ content: 1 }).exec((err, entries) => {
+            console.log("Locating: Week", weekNumber)
+            this.db.find({$or:[{weekNumber: weekNumber},{isPersistent: true}]}).sort({}).exec((err, entries) => {
               err ? reject(err) : resolve(entries);
             })
         })

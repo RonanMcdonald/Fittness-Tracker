@@ -289,6 +289,18 @@ h2 {
           box-sizing: border-box;
 }
 
+.top-bar .today-btn,
+.top-bar .current-week-display,
+.top-bar .page-change-btn {
+  margin-right: 25px;
+}
+
+.top-bar p {
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+}
+
 .top-bar a {
   text-decoration: none;
   color: black;
@@ -308,6 +320,73 @@ h2 {
 
 .main-wrapper {
   padding: 15px 15px;
+}
+
+.form-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.form-wrapper input[type=text],
+.form-wrapper input[type=text]::-webkit-input-placeholder {
+  font-size: 30px;
+}
+
+.form-wrapper input[type=text],
+.form-wrapper input[type=text]:-ms-input-placeholder {
+  font-size: 30px;
+}
+
+.form-wrapper input[type=text],
+.form-wrapper input[type=text]::-ms-input-placeholder {
+  font-size: 30px;
+}
+
+.form-wrapper input[type=text],
+.form-wrapper input[type=text]::placeholder {
+  font-size: 30px;
+}
+
+.form-wrapper input[type=text]::-webkit-input-placeholder {
+  text-decoration: underline;
+  color: #646464;
+}
+
+.form-wrapper input[type=text]:-ms-input-placeholder {
+  text-decoration: underline;
+  color: #646464;
+}
+
+.form-wrapper input[type=text]::-ms-input-placeholder {
+  text-decoration: underline;
+  color: #646464;
+}
+
+.form-wrapper input[type=text]::placeholder {
+  text-decoration: underline;
+  color: #646464;
+}
+
+.form-wrapper input[type=text] {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: none;
+  outline: none;
+}
+
+.form-wrapper input[type=submit] {
+  background-color: transparent;
+  outline: none;
+  color: black;
+  font-weight: 500;
+  font-size: 20px;
+  border: 1px solid black;
+  padding: 8px 12px;
 }
 
 .list-wrapper {
@@ -381,5 +460,9 @@ h2 {
 
 .list-wrapper ul .checked {
   text-decoration: line-through;
+}
+
+.list-wrapper ul .empty-msg {
+  font-size: 24px;
 }
 /*# sourceMappingURL=main.css.map */

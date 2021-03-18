@@ -13,9 +13,7 @@ h2 {font-size: 1.5em; font-weight: 400;}
 
 .dashboard-wrapper {
     display: flex;
-    //overflow-x: hidden;
 }
-
 
 // --- Sidebar --- //
 .sidebar {
@@ -106,6 +104,19 @@ h2 {font-size: 1.5em; font-weight: 400;}
     padding: 15px 10px;
     box-sizing: border-box;
 
+    // Spacing
+    .today-btn, 
+    .current-week-display,
+    .page-change-btn {
+        margin-right: 25px;
+    }
+
+    p {
+        padding: 0;
+        margin: 0;
+        font-size: 20px;
+    }
+
     a {
         text-decoration: none;
         color: black;
@@ -129,7 +140,34 @@ h2 {font-size: 1.5em; font-weight: 400;}
 }
 
 .form-wrapper {
-    
+    display: flex;
+    justify-content: space-between;
+
+    input[type=text], 
+    input[type=text]::placeholder {
+        font-size: 30px;
+    }
+
+    input[type=text]::placeholder {
+        text-decoration: underline;
+        color: rgb(100, 100, 100);
+    }
+
+    input[type=text] {
+        flex: 1;
+        border: none;
+        outline: none;
+    }
+
+    input[type=submit] {
+        background-color: transparent;
+        outline: none;
+        color: black;
+        font-weight: 500;
+        font-size: 20px;
+        border: 1px solid black;
+        padding: 8px 12px;
+    }
 }
 
 .list-wrapper {
@@ -181,6 +219,10 @@ h2 {font-size: 1.5em; font-weight: 400;}
 
         .checked {
             text-decoration: line-through;
+        }
+
+        .empty-msg {
+            font-size: 24px;
         }
     }
 }
