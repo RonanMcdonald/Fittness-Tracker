@@ -21,74 +21,92 @@ class pList {
             name: 'Run',
             goal: 5,
             current: 2,
-            isComplete: false
+            isComplete: false,
+            isPersistent: true,
         });
         this.db.insert({
             name: 'Eat',
             goal: 4,
             current: 2,
-            isComplete: false
-        });
-        this.db.insert({
-            name: 'Swim',
-            goal: 7,
-            current: 6,
-            isComplete: false
+            isComplete: false,
+            isPersistent: true,
         });
 
-        // Completed tasks
         this.db.insert({
             name: 'Tennis',
             goal: 5,
             current: 5,
-            isComplete: true
+            isComplete: true,
+            isPersistent: true,
         });
         this.db.insert({
             name: 'Walk',
             goal: 8,
             current: 9,
-            isComplete: true
-        });
-        this.db.insert({
-            name: 'Drink',
-            goal: 7,
-            current: 7,
-            isComplete: true
+            isComplete: true,
+            isPersistent: true,
         });
 
-        // // Achievements
+        // Recurring
+        this.db.insert({
+            name: 'Run',
+            isComplete: false,
+            isPersistent: false,
+            weekNumber: 0
+        });
+        this.db.insert({
+            name: 'Eat',
+            isComplete: false,
+            isPersistent: false,
+            weekNumber: 0
+        });
+
+        // this.db.insert({
+        //     name: 'Swim',
+        //     goal: 7,
+        //     current: 6,
+        //     isComplete: false
+        // });
         // this.db.insert({
         //     name: 'Drink',
         //     goal: 7,
         //     current: 7,
         //     isComplete: true
-        // });
+        // }); 
+        
     }
 
-    addGoal(goal) {
+    // Generic
+    getGoalById(id) {
+        return new Promise((resolve, reject) => {
+            this.db.findOne({ _id: id }, (err, entry) => {
+                err ? reject(err) : resolve(entry)
+            })
+        })
+    }
+
+    deleteEntry(id) {
+        this.db.remove({ _id: id }, { multi: false }, (err, numOfDocsRemoved) => {
+            err ? console.log(`Error deleting goal: ${id}`) : console.log(`${numOfDocsRemoved} Goal removed from db`)
+        })
+    }
+    
+    // Specific
+    addPersistentGoal(goal) {
         var entry = {
             name: goal.name,
             goal: goal.goal,
-            current: 0,
-            isComplete: false,
+            current: goal.current,
+            isComplete: goal.isComplete,
         }
 
         console.log('entry created', entry);
         this.db.insert(entry, function(err, doc) {
-            if (err) {
-             console.log('Error inserting document', subject);
-            } else {
-                console.log('document inserted into the database', doc);
-            }
+            err ? onsole.log('Error inserting document', subject) : console.log('document inserted into the database', doc);
         })
     }
 
-    updateGoal(goal) {
-        this.db.update({ _id: goal.id }, {$set: goal}, {}, function () {
-
-        })
-    }
-
+    // Get all goals
     getAllGoals() {
         return new Promise((resolve, reject) => {
             this.db.find({}).sort({ content: 1 }).exec((err, entries) => {
@@ -97,47 +115,36 @@ class pList {
         })
     }
 
-    getActiveGoals() {
-        return new Promise((resolve, reject) => {
-            this.db.find({ isComplete: Boolean(false) }, (err, entries) => {
-                err ? reject(err) : resolve(entries)
-            })
-        })
-    }
-
-    getCompletedGoals() {
-        return new Promise((resolve, reject) => {
-            this.db.find({ isComplete: true }, (err, entries) => {
-                err ? reject(err) : resolve(entries), console.log("promise:", entries);
-            })
-        });
-
-        console.log("COMPLETED GOALS REACHED");
-    }
-
+    // Decrement
     updateDecrement(id, current) {
         this.db.update({ _id: id }, { $set: { current: (current - 1) }}, (err, numUpdated) => {
             err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
         });
     }
 
+    // Increment
     updateIncrement(id, current) {
         this.db.update({ _id: id }, { $set: { current: (current + 1) }}, (err, numUpdated) => {
             err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in db`)
         });
     }
 
-    getGoalById(id) {
-        return new Promise((resolve, reject) => {
-            this.db.findOne({ _id: id }, (err, entry) => {
-                err ? reject(err) : resolve(entry)
-            })
+    
+
+    // --- TASKS ---- //
+    addTask(task) {
+        var entry = {
+            name: task.name,
+            isComplete: task.isComplete,
+            isPersistent: task.isPersistent,
+            weekNumber: task.weekNumber
+        }
+
+        console.log('entry created', entry);
+        this.db.insert(entry, function(err, doc) {
+            err ? onsole.log('Error inserting document', subject) : console.log('document inserted into the database', doc);
         })
     }
-}
-
-class rList {
-
 }
 
 module.exports = pList;

@@ -1,22 +1,35 @@
 const modelDAO = require('../models/model');
 const db = new modelDAO();
 
+const moment = require('moment');
+
 db.init();
 
-exports.index = async (req, res) => {
+exports.currentWeek = (req, res) => {
+    const currentWeek = moment().isoWeek()
+    res.redirect(`${currentWeek}`)
+}
+
+exports.dashboard = async (req, res) => {
     await db.getAllGoals().then(data => {
         res.render('dashboard', {
-            'activeGoals': data.filter(goal => goal.isComplete === false),
-            'completedGoals': data.filter(goal => goal.isComplete === true)
+            'activePersistentGoals': data.filter(goal => goal.isComplete === false && goal.isPersistent === true),
+            'completedPersistentGoals': data.filter(goal => goal.isComplete === true),
+            'activeRecurring': data.filter(goal => goal.isComplete === false && goal.isPersistent === false)
         })
         // console.log("data: ", data);
     })
 }
 
+// Delete goal
+exports.deleteEntry = async function(req, res) {
+    const id = req.params._id;
+    await db.deleteEntry(id);
+    res.redirect(req.baseUrl + '/dashboard');
+}
+
 exports.addGoal = async (req, res) => { 
-    res.render('new_goal', {
-        'title': "New Goal",
-    })
+    res.render('new_goal');
 }
 
 exports.post_new_entry = function(req, res) {
@@ -28,44 +41,44 @@ exports.post_new_entry = function(req, res) {
         name: req.body.name,
         goal: req.body.amount,
         current: 0,
-        isComplete: false
+        isComplete: false,
+        weekNumber: 0,
     }
 
-    db.addGoal(goalObject);
+    db.addPersistentGoal(goalObject);
     res.redirect(req.baseUrl + '/dashboard');
-}
-
-// ronan too smooth brain to do this
-exports.update = function(req, res) {
-
-    const goalObject = {
-        _id: req.body.id,
-        name: req.body.name,
-        goal: req.body.amount,
-        current: req.body.current,
-        isComplete: req.body.isComplete
-    }
-
-    db.updateGoal(goalObject)
 }
 
 // Decrement
 exports.decrement = async function(req, res) {
     const id = req.params._id;
-    console.log(id);
-
     const goal = await db.getGoalById(id);
     await db.updateDecrement(goal._id, goal.current);
     res.redirect(req.baseUrl + '/dashboard');
 }
 
-
 // Increment
 exports.increment = async function(req, res) {
     const id = req.params._id;
-    console.log(id);
-
     const goal = await db.getGoalById(id);
     await db.updateIncrement(goal._id, goal.current);
+    res.redirect(req.baseUrl + '/dashboard');
+}
+
+
+// Add Task
+exports.addTask = async function(req, res) {
+    if (!req.body.name) {
+        return response.status(400).send("Goal does not have a name");
+    }
+
+    const taskObject = {
+        name: req.body.name,
+        isComplete: false,
+        isPersistent: false,
+        weekNumber: 0
+    }
+
+    db.addTask(taskObject);
     res.redirect(req.baseUrl + '/dashboard');
 }

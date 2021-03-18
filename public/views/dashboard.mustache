@@ -1,113 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../style/css/main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <title>FitTracker</title>
+    {{>partials/head}}
 </head>
 <body>
-    <!--- <div class="navigation">
-        <div class="logo">
-            <h1>TrackFit</h1>
-        </div>
-    </div> -->
+    {{>partials/navigation}}
     
-    <div class="sidebar">
-        <!-- Personal Goals -->
-        <div class="goal-tracker">
-            <div class="goal-top">
-                <h1>Your Goals</h1>
-                <div class="dropdown-toggle">
-                    <!-- <img src="../style/img/icons/drop-arrow.svg" alt=""> -->
-                </div>
-            </div>
-            {{#activeGoals}}
-            <div class="goal-container">
-                <div class="text-wrapper">
-                    <div class="g-i-name"><h2>{{name}}</h2></div>
-                    <div class="g-i-progress">
-                        <h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2>
-                        <a href="/decrement/{{_id}}"><img class="decrement" src="../style/img/icons/drop-arrow.svg" alt=""></a>
-                        <a href="/increment/{{_id}}"><img class="increment" src="../style/img/icons/drop-arrow.svg" alt=""></a>
+    <div class="dashboard-wrapper">
+        <div class="sidebar">
+            <!-- Personal Goals -->
+            <div class="goal-tracker">
+                <div class="goal-top">
+                    <h1>Your Goals</h1>
+                    <div class="dropdown-toggle">
+                        <!-- <img src="../style/img/icons/drop-arrow.svg" alt=""> -->
                     </div>
                 </div>
-                <div class="progress-bar">
-                    <div class="inner"></div>
+                {{#activePersistentGoals}}
+                <div class="goal-container">
+                    <div class="text-wrapper">
+                        <div class="g-i-name"><h2>{{name}}</h2></div>
+                        <div class="g-i-progress">
+                            <h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2>
+                            <a href="/decrement/{{_id}}"><img class="decrement" src="../style/img/icons/drop-arrow.svg" alt=""></a>
+                            <a href="/increment/{{_id}}"><img class="increment" src="../style/img/icons/drop-arrow.svg" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="inner"></div>
+                    </div>
+                    <div class="g-remove"><a href="/delete/{{_id}}">Remove</a></div>
                 </div>
+                {{/activePersistentGoals}}
+                <div class="add-goal-wrapper">
+                    <a href="/new">Add Goal</a>
+                </div>
+                {{^activePersistentGoals}}
+                    <p>Set your own long-term goals!</p>
+                {{/activePersistentGoals}}
             </div>
-            {{/activeGoals}}
-            <div class="add-goal-wrapper">
-                <a href="/new">Add Goal</a>
+    
+            
+            <!-- Achievements -->
+            <!-- IMPLEMENT LATER
+            <div class="goal-tracker">
+                <div class="goal-top">
+                    <h1>Achievements</h1>
+                    <div class="dropdown-toggle">
+                        <img src="../style/img/icons/drop-arrow.svg" alt="">
+                    </div>
+                </div>
+                {{#achievements}}
+                <div class="goal-container">
+                    <div class="text-wrapper">
+                        <div class="g-i-name"><h2>{{name}}</h2></div>
+                        <div class="g-i-progress"><h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2></div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="inner"></div>
+                    </div>
+                </div>
+                {{/achievements}}
             </div>
-            {{^activeGoals}}
-                <p>Set your own goals!</p>
-            {{/activeGoals}}
-        </div>
-
-        
-        <!-- Achievements -->
-        <!-- IMPLEMENT LATER
-        <div class="goal-tracker">
-            <div class="goal-top">
-                <h1>Achievements</h1>
-                <div class="dropdown-toggle">
-                    <img src="../style/img/icons/drop-arrow.svg" alt="">
+            -->
+    
+            <!-- Completed Goals -->
+            <div class="goal-tracker">
+                <div class="goal-top">
+                    <h1>Completed Goals</h1>
+                    <div class="dropdown-toggle">
+                        <!-- <img src="../style/img/icons/drop-arrow.svg" alt=""> -->
+                    </div>
                 </div>
+                <div class="g-total"><h2>Total Completed:</h2> <h2 id="total">0</h2></div>
+                {{#completedPersistentGoals}}
+                <div class="goal-container">
+                    <div class="text-wrapper">
+                        <div class="g-i-name"><h2>{{name}}</h2></div>
+                        <div class="g-i-progress">
+                            <h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="inner"></div>
+                    </div>
+                    <div class="g-remove"><a href="/delete/{{_id}}">Remove</a></div>
+                </div>
+                <script> // Get total completed tasks
+                    $("#total").text(parseInt($('#total').text(), 10) + 1) 
+                </script>
+                {{/completedPersistentGoals}}
             </div>
-            {{#achievements}}
-            <div class="goal-container">
-                <div class="text-wrapper">
-                    <div class="g-i-name"><h2>{{name}}</h2></div>
-                    <div class="g-i-progress"><h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2></div>
-                </div>
-                <div class="progress-bar">
-                    <div class="inner"></div>
-                </div>
-            </div>
-            {{/achievements}}
-        </div>
-        -->
-
-        <!-- Completed Goals -->
-        <div class="goal-tracker">
-            <div class="goal-top">
-                <h1>Completed Goals</h1>
-                <div class="dropdown-toggle">
-                    <!-- <img src="../style/img/icons/drop-arrow.svg" alt=""> -->
-                </div>
-            </div>
-            <div class="g-total"><h2>Total Completed:</h2> <h2 id="total">0</h2></div>
-            {{#completedGoals}}
-            <div class="goal-container">
-                <div class="text-wrapper">
-                    <div class="g-i-name"><h2>{{name}}</h2></div>
-                    <div class="g-i-progress"><h2><span class="current">{{current}}</span>/<span class="goal">{{goal}}</span></h2></div>
-                </div>
-                <div class="progress-bar">
-                    <div class="inner"></div>
-                </div>
-            </div>
-            <script> // Get total completed tasks
-                $("#total").text(parseInt($('#total').text(), 10) + 1) 
+            <script> 
+                // Percentage bar calculation
+                $(".goal-container").each(function() {
+                    var current = $(this).find(".current").text();
+                    var goal = $(this).find(".goal").text();
+                    var percentage = Math.round((current/goal) * 100);
+                    $(this).find(".progress-bar > .inner").css("width", percentage + "%");
+                })
             </script>
-            {{/completedGoals}}
+        </div>
+    
+        <div class="main-bar">
+            <div class="top-bar">
+                <div class="today-btn">
+                    <a href="today/{{_id}}">Today</a>
+                </div>
+                <div class="page-change-btn">
+                    <a href=""><</a>
+                    <a href="">></a>
+                </div>
+                <div class="current-week-display">
+                </div>
+                <div class="current-date-display">
+                    
+                </div>
+            </div>
+
+            <div class="main-wrapper">
+                <form method="POST" action="/submit-form">
+                    <input type="text" id="name" name="name" placeholder="Enter the goal name">
+                    <input type="submit" />
+                </form>
+
+                <div class="list-wrapper">
+                    <ul>
+                        {{#activeRecurring}}
+                        <li>
+                            <div class="check-circle">
+                                <a href="">
+                                    <img src="../style/img/icons/circle-def.png" width="100" height="100">
+                                </a>
+                            </div>
+                            <div class="task">{{name}}</div>
+                            <div class="edit-buttons">
+                                <a href="">Edit</a>
+                                <div class="g-remove"><a href="/delete/{{_id}}">Delete</a></div>
+                            </div>
+                        </li>
+                        {{/activeRecurring}}
+                    </ul>
+                </div>
         </div>
     </div>
-    
-
-
-
-<script> // Percentage bar calculation
-        $(".goal-container").each(function() {
-            var current = $(this).find(".current").text();
-            var goal = $(this).find(".goal").text();
-            var percentage = Math.round((current/goal) * 100);
-            $(this).find(".progress-bar > .inner").css("width", percentage + "%");
-        })
-    </script>
 </body>
 </html>
