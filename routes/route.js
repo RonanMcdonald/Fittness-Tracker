@@ -4,27 +4,21 @@ const controller = require('../controllers/controller');
 const router = express.Router();
 
 // --- Routes --- //
-// Generic:
-// Root
-router.get("/", controller.currentWeek);
-// Dashboard
-router.get("/:currentWeek", controller.dashboard);
-// Delete entry
-router.get('/delete/:_id', controller.deleteEntry);
-
-// Goals:
+router.get("/dashboard", controller.dashboard);
 // Add new goal
 router.get('/new', controller.addGoal);
 router.post('/new', controller.post_new_entry);
 // Update goal
 router.get('/decrement/:_id', controller.decrement); // Decrement
 router.get('/increment/:_id', controller.increment); // Increment
+// Delete goal
+router.get('/delete/:_id', controller.deleteEntry); // Delete
 
-// Tasks:
-// Edit task
-//router.get('/new_goal/:_id', controller.updateTask);
-// Update Task
 router.post('/submit-form', controller.addTask)
+
+// Edit Task
+router.get('/editTask', controller.editTask);
+router.post('/editTask', controller.editTaskPost);
 
 // --- Errors --- //
 // 404 - Page not found

@@ -28,6 +28,7 @@ exports.deleteEntry = async function(req, res) {
     res.redirect(req.baseUrl + '/dashboard');
 }
 
+
 exports.addGoal = async (req, res) => { 
     res.render('new_goal');
 }
@@ -42,7 +43,7 @@ exports.post_new_entry = function(req, res) {
         goal: req.body.amount,
         current: 0,
         isComplete: false,
-        weekNumber: 0,
+        isPersistent: true
     }
 
     db.addPersistentGoal(goalObject);
@@ -66,6 +67,7 @@ exports.increment = async function(req, res) {
 }
 
 
+
 // Add Task
 exports.addTask = async function(req, res) {
     if (!req.body.name) {
@@ -80,5 +82,17 @@ exports.addTask = async function(req, res) {
     }
 
     db.addTask(taskObject);
+    res.redirect(req.baseUrl + '/dashboard');
+}
+
+exports.editTask = async (req, res) => { 
+    res.render('edit_task');
+}
+
+exports.editTaskPost = async function (req, res) { 
+    console.log("EDIT PAGE REACHED")
+    // const id = req.params._id;
+    // const goal = await db.getGoalById(id);
+    // await db.updateIncrement(goal._id, goal.current);
     res.redirect(req.baseUrl + '/dashboard');
 }

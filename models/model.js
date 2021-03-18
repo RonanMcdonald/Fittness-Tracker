@@ -98,6 +98,7 @@ class pList {
             goal: goal.goal,
             current: goal.current,
             isComplete: goal.isComplete,
+            isPersistent: goal.isPersistent
         }
 
         console.log('entry created', entry);
@@ -144,6 +145,10 @@ class pList {
         this.db.insert(entry, function(err, doc) {
             err ? onsole.log('Error inserting document', subject) : console.log('document inserted into the database', doc);
         })
+    }
+
+    editTask(task) {
+        console.log("edit");
     }
 }
 

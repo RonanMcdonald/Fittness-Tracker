@@ -4,14 +4,13 @@
     {{>partials/head}}
 </head>
 <body>
+    <div class="prev-goal-name">
+        <p>Previous Goal Name: {{}}</p>
+    </div>
     <form method="post" role="form">
         <div class="form-group">
-            <label for="name">Goal name</label>
+            <label for="name">New goal name</label>
             <input type="text" id="name" name="name" placeholder="Enter the goal name" required>
-        </div>
-        <div class="form-group">
-            <label for="amount">Goal amount</label>
-            <input type="text" id="amount" name="amount" placeholder="Enter a goal amount" required>
         </div>
         <div class="form-group">
             <input type="submit" value="Post entry">
