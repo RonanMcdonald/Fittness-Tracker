@@ -11,5 +11,6 @@ FitTracker is a weekly goal tracking web application.
 
 ## Credit
 - Author:     Ronan Mcdonald  
-- Coursework: WPD2_CW1        
+- Coursework: WPD2_CW1
+-         
 

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" translate="no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../style/css/main.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <title>FitTracker</title>
+</head>
+
+<body>
+  <a name="#about"></a>
+  <div class="wrapper">
+    <div class="index-navigation">
+      <div class="left-align">
+        <img src="../style/img/icons/logo.svg" alt="">
+      </div>
+      <div class="center-align">
+        <ul>
+          <li><a href="#about" id="active">About</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="/dashboard">Demonstation</a></li>
+        </ul>
+      </div>
+      <div class="right-align">
+        <ul>
+          <li><a href="#">Sign up</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="splash">
+      <div class="splash-container">
+        <div class="text-wrapper">
+          <h1>The better way to manage your week</h1>
+          <p>Fitracker is the easiest way to track your weekly workouts!</p>
+          <div class="account-links">
+            <ul>
+              <li><a href="#features">Learn more</a></li>
+              <li><a href="/dashboard">Open demo</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="thumbnail">
+          <img src="../style/img/splash/thumbnail.png" alt="test">
+        </div>
+
+        <div class="splash-svg">
+          <svg viewBox="0 0 806 778" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M694.532 -417L620.221 -367.208C545.909 -317.417 347.975 -274.185 217.929 -174.602C87.8837 -75.0186 25.7269 80.9167 25.7269 180.5C25.7269 280.083 50.8008 369.755 32.2229 469.339C13.645 568.922 -15.9234 674.924 10.4969 738.922L25.7269 778L806 778L806 728.208C806 678.417 806 578.833 806 479.25C806 379.667 806 280.083 806 180.5C806 80.9167 806 -18.6667 806 -118.25C806 -217.833 806 -317.417 806 -367.208V-417L694.532 -417Z"
+              fill="#EBE8F2" />
+          </svg>
+        </div>
+        <span class="splash-background"></span>
+
+      </div>
+    </div>
+
+    <!-- section header -->
+    <!-- 
+      <div class="sub-heading">
+      <p>Features</p>
+      <a id="features"></a>
+    </div>
+    -->
+
+    <a name="features"></a>
+    <div class="section-container">
+      <!-- Manage weekly tasks -->
+      <!-- Text Aligned-Left -->
+      <div class="section">
+        <div class="col-1">
+          <div class="title">
+            <h2>Manage weekly tasks</h2>
+          </div>
+          <div class="content">
+            <p>Each week you can add new tasks, or plan ahead and plan your future workouts!</p>
+            <p>Tasks can be sorted by tag, create your own!</p>
+            <p>Most importantly, you can complete tasks and look back on history to see how far you’ve come!</p>
+          </div>
+        </div>
+        <div class="col-2 thumbnail">
+          <img src="../style/img/splash/showcase-1.png" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-container">
+      <!-- Set persistent goals -->
+      <!-- Text Aligned-Right -->
+      <div class="section">
+        <div class="col-1">
+          <div class="title">
+            <h2>Set persistent goals</h2>
+          </div>
+          <div class="content">
+            <p>Want to set a long term goal? Look no further!</p>
+            <p>Long term goals can be created, along side your weekly tasks of course</p>
+            <p>As theyre completed, they get added to a completed goals list, where you can clearly see everything you
+              have accomplished</p>
+          </div>
+        </div>
+        <div class="col-2">
+          <img src="../style/img/splash/showcase-2.png" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-container">
+      <!-- Create free account -->
+      <!-- Text Aligned-Left -->
+      <div class="section">
+        <div class="col-1">
+          <div class="title">
+            <h2>Create free account</h2>
+          </div>
+          <div class="content">
+            <p>You can track your progress forever using a free account!</p>
+            <p>With an account, you can save all your data and also gain the ability to share plans with friends!</p>
+            <p>You can access a demo version of the application bofore making an account!</p>
+          </div>
+        </div>
+        <div class="col-2">
+          <img src="../style/img/splash/showcase-3.png" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-container">
+      <!-- Share with friends -->
+      <!-- Text Aligned-Right -->
+      <div class="section">
+        <div class="col-1">
+          <div class="title">
+            <h2>Share with friends</h2>
+          </div>
+          <div class="content">
+            <p>With an account you are able to share all your present and future plans with friends, aslong as they have
+              an account of course!</p>
+            <p>Sign up is easy! Almost no information is required, other than a username and password of course.</p>
+          </div>
+        </div>
+        <div class="col-2 illistration">
+          <img src="../style/img/splash/showcase-4.png" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-container">
+      <!-- Share with friends -->
+      <!-- Text Aligned-Right -->
+      <div class="section">
+        <div class="col-1 full">
+          <div class="title">
+            <h2>Ready to get started?</h2>
+          </div>
+          <div class="content">
+            <p>Start planning your fitness journey</p>
+            <a href="#">Sign up</a></li>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Made with love, by <a href="#">Ronan Mcdonald</a></p>
+  </div>
+</body>
+
+</html>
