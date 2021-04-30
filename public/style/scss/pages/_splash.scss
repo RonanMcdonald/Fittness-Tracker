@@ -4,7 +4,6 @@ body {
   overflow-x: hidden;
 }
 
-.index-navigation,
 .splash-container,
 .section,
 .sub-heading {
@@ -20,80 +19,11 @@ body {
   }
 }
 
-.index-navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px auto;
-  position: relative;
-  z-index: 20;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      display: inline-block;
-    }
-
-    a {
-      color: #373f41;
-      font-weight: 500;
-      font-size: 1.25em;
-      display: block;
-      padding: 6px 14px;
-    }
-
-    a:hover {
-      color: $primary;
-    }
-  }
-
-  .left-align,
-  .right-align {
-    flex-basis: 0;
-    flex-grow: 1;
-    min-width: 190px;
-  }
-
-  .left-align {
-    text-align: left;
-  }
-
-  .right-align {
-    text-align: right;
-  }
-
-  .center-align {
-    flex-grow: 2;
-    text-align: center;
-  }
-
-  .right-align {
-    // Sign up
-    li:nth-child(1) a {
-      color: $primary;
-    }
-
-    // Login
-    li:nth-child(2) a {
-      color: white;
-      background-color: $primary;
-      border-radius: 12px;
-    }
-  }
-
-  #active {
-    color: $primary;
-  }
-}
-
 .splash {
   display: flex;
   min-height: 600px;
-
   height: 60vh;
+
   .splash-container {
     width: 100%;
     display: flex;

@@ -14,215 +14,7 @@ h2 {
 
 .dashboard-wrapper {
   display: flex;
-}
-
-.sidebar {
-  width: fit-content;
   min-height: 100vh;
-  max-height: 100vh;
-  background-color: white;
-  position: relative;
-  box-shadow: 0px 0px 8px 0px #00000028;
-  overflow: hidden;
-
-  .top-nav,
-  .goal-tracker {
-    padding: 15px 12.5px 15px 15px;
-  }
-
-  // Top, Logo - Icon & Text
-  .top-nav {
-    display: flex;
-    align-items: center;
-
-    p {
-      font-weight: 500;
-      font-size: 28px;
-      margin-left: 15px;
-    }
-
-    img {
-      width: 40px;
-      height: 100%;
-      box-sizing: border-box;
-    }
-  }
-
-  .account-wrapper {
-    background-color: #f7f8fa;
-    display: flex;
-    align-items: center;
-    padding: 8px 15px;
-
-    .account-icon {
-      display: flex;
-      align-items: center;
-
-      // Icon Placeholder
-      & img:nth-child(1) {
-        width: auto;
-        height: 30px;
-      }
-      // Drop arrow
-      & img:nth-child(2) {
-        transform: rotate(-90deg);
-        margin-left: 8px;
-        width: auto;
-        height: 15px;
-      }
-    }
-
-    .account-name {
-      margin-left: 20px;
-      font-size: 24px;
-    }
-  }
-
-  .tracker-container {
-    overflow-y: auto;
-    height: calc(100% - 110px);
-  }
-
-  // Middle, Goal
-  .goal-tracker {
-    width: fit-content;
-    position: relative;
-
-    h1 {
-      font-size: 24px;
-    }
-
-    h2 {
-      font-size: 22px;
-    }
-
-    a {
-      color: blue;
-    }
-
-    .goal-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .dropdown-toggle {
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-    }
-
-    .goal-container {
-      width: 300px;
-      padding: 4px 12px;
-      position: relative;
-
-      .text-wrapper {
-        display: flex;
-        justify-content: space-between;
-      }
-
-      .g-i-progress {
-        display: flex;
-        align-items: center;
-
-        h2 {
-          margin: 0 8px;
-        }
-
-        .increment,
-        .decrement {
-          margin-bottom: -4.5px;
-        }
-
-        .increment {
-          transform: rotate(180deg);
-        }
-
-        .decrement {
-          transform: rotate(0);
-          margin-right: 5px;
-        }
-      }
-
-      .progress-bar {
-        border: 1px solid rgba(0, 0, 0, 0.75);
-        border-radius: 8px;
-        height: 12px;
-        overflow: hidden;
-
-        .inner {
-          min-height: 100%;
-          background-color: #00ffa3;
-          box-sizing: border-box;
-          color: transparent;
-        }
-      }
-
-      .g-remove {
-        text-align: left;
-        margin: 0;
-        a {
-          text-decoration: none;
-          color: black;
-        }
-      }
-    }
-
-    .wrapper {
-      overflow: hidden;
-    }
-
-    .goal-container::before {
-      content: '';
-      width: 2.5px;
-      height: 100%;
-      position: absolute;
-      left: 2px;
-      background-color: #633fdbab;
-    }
-
-    .wrapper .goal-container:last-child::before {
-      height: 80%;
-    }
-
-    .wrapper .goal-container:last-of-type::before {
-      height: 80%;
-    }
-
-    .g-total {
-      display: flex;
-      justify-content: space-between;
-      padding-right: 12px;
-      h2 {
-        font-size: 18px;
-      }
-    }
-  }
-
-  .goal-tracker:nth-child(2) {
-    .goal-container {
-      .g-i-progress {
-        margin-right: -8px;
-      }
-    }
-  }
-
-  // Bottom, Info Container
-  .info-container {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    padding: 8px 0 0 0;
-    text-align: center;
-    background-color: #f7f8fa;
-    img {
-      width: 100%;
-      height: 30px;
-      box-sizing: border-box;
-    }
-  }
 }
 
 .main-content {
@@ -355,12 +147,23 @@ h2 {
     font-weight: 500;
     font-size: 28px;
   }
+
+  .week-date {
+    p {
+      font-size: 24px;
+      color: #4b4b4b;
+    }
+  }
 }
 
 // Spacing
 .content-navigation,
 .section-title {
   padding: 0 20px;
+}
+
+.section-title {
+  margin-bottom: 5px;
 }
 
 .main-wrapper {
@@ -392,6 +195,8 @@ h2 {
   input[type='text'],
   input[type='text']::placeholder {
     font-size: 28px;
+    font-weight: 500;
+    color: black;
     padding: 6px 0;
   }
 
@@ -545,5 +350,36 @@ h2 {
     opacity: 1;
     cursor: pointer;
     border: $primary 2px solid;
+  }
+}
+
+.help-screen-wrapper {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .help-info-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+    border: 1px solid black;
+
+    width: 100%;
+    max-height: 609px;
+    max-width: 808px;
+  }
+
+  .screen-cover {
+    content: '';
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(3px);
+    display: block;
+    width: 100vw;
+    height: 100vh;
   }
 }

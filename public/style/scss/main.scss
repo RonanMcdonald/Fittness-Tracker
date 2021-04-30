@@ -1,8 +1,15 @@
+// Core
 @import 'core/typography';
 @import 'core/colour';
+@import 'core/base';
 
-@import 'pages/dashboard';
+// Modules
+@import 'modules/splash-navigation';
+
+// Pages
 @import 'pages/splash';
+@import 'pages/registration';
+@import 'pages/dashboard';
 
 body,
 html {

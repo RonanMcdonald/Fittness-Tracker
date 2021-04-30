@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>partials/head}}
+</head>
+
+<body>
+    {{>partials/splash_navigation}}
+    <div class="wrapper">
+        <div class="reg-container">
+            <div class="reg-title">
+                <p>Sign up</p>
+            </div>
+
+            <div class="reg-form">
+                <form action="signup" method="post">
+                    <div class="form-group">
+                        {{! <label for="email">Email</label> }}
+                        <input type="email" name="email" id="email" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        {{! <label for="email">Username</label> }}
+                        <input type="text" name="username" id="username" placeholder="Username">
+                    </div>
+
+                    <div class="form-group">
+                        {{! <label for="email">Password</label> }}
+                        <input type="password" name="password" id="password" placeholder="Password">
+                    </div>
+
+                    <div class="form-group">
+                        {{! <label for="email">Confrim Password</label> }}
+                        <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password">
+                    </div>
+                    
+                    <input type="submit" name="" id="" value="Sign Up">
+                </form>
+            </div>
+
+            <div class="reg-other">
+                <a href="/">Need help?</a>
+                
+                <span>
+                   <p>Already have an account?</p> <a href="/login">Login Now</a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Remove active link from nav
+        $('#active').removeAttr('id')
+    </script>
+</body>
+</html>

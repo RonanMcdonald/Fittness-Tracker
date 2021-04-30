@@ -22,7 +22,10 @@ exports.dashboard = async (req, res) => {
       completedPersistentGoals: data.filter((goal) => goal.isComplete === true && goal.isPersistent === true),
       activeRecurring: data.filter((goal) => goal.isComplete === false && goal.isPersistent === false),
       completedRecurring: data.filter((goal) => goal.isComplete === true && goal.isPersistent === false),
-      weekRange: 'e',
+      weekRange: {
+        startDate: moment().week(currentWeek).day(0).format('MMMM Do'),
+        endDate: moment().week(currentWeek).day(7).format('MMMM Do'),
+      },
       currentWeek: currentWeek,
       nextWeek: currentWeek + 1,
       previousWeek: currentWeek - 1,
@@ -147,4 +150,12 @@ exports.prevWeek = async function (req, res) {
 
 exports.renderIndex = async function (req, res) {
   res.render('index')
+}
+
+exports.signup = async function (req, res) {
+  res.render('signup')
+}
+
+exports.login = async function (req, res) {
+  res.render('login')
 }

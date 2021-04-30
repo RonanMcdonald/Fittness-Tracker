@@ -4,8 +4,14 @@ const controller = require('../controllers/controller')
 const router = express.Router()
 
 // --- Routes --- //
+// Splash //
 router.get('/', controller.renderIndex)
 
+// Registration & Login //
+router.get('/signup', controller.signup)
+router.get('/login', controller.login)
+
+// Dashboard //
 router.get('/dashboard', controller.currentWeek)
 
 router.get('/dashboard/:currentWeek', controller.dashboard)

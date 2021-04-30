@@ -6,21 +6,31 @@
 </head>
 
 <body>
-    {{>partials/navigation}}
-
     <div class="dashboard-wrapper">
-        <div class="sidebar">
-            <div class="top-nav">
+        <div class="m-col-1">
+            <div class="logo-wrapper">
                 <img src="../style/img/icons/logo.svg" alt="">
-                <div class="logo-text">
-                    <p>FitTracker</p>
-                </div>
             </div>
 
+            <div class="page-links">
+                <a href=""><img src="../style/img/icons/home.svg" alt=""></a>
+                <a href=""><img src="../style/img/icons/account.svg" alt=""></a>
+                <a href=""><img src="../style/img/icons/friends.svg" alt=""></a>
+                <a href=""><img src="../style/img/icons/sharelink.svg" alt=""></a>
+                <a href=""><img src="../style/img/icons/logout.svg" alt=""></a>
+            </div>
+
+            <div class="info-container">
+                <div class="info-icon">
+                    <img src="../style/img/icons/info.svg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="m-col-2">
             <div class="account-wrapper">
                 <div class="account-icon">
                     <img src="../style/img/icons/account-placeholder.svg" alt="">
-                    <img src="../style/img/icons/increment-arrow.svg" alt="">
                 </div>
                 <div class="account-name">
                     <p>Adam Brown</p>
@@ -108,12 +118,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="info-container">
-                <div class="info-icon">
-                    <img src="../style/img/icons/info.svg" alt="">
-                </div>
-            </div>
         </div>
 
         <div class="main-content">
@@ -149,14 +153,14 @@
                 <div class="title">
                     <p>Tasks</p>
                 </div>
-                <div class="week_date">
-                    <p id="week_date">March 20th to 27th</p>
+                <div class="week-date">
+                    <p id="week_date">{{weekRange.startDate}} to {{weekRange.endDate}}</p>
                 </div>
             </div>
 
             <div class="main-wrapper">
                 <form class="form-wrapper" method="POST" action="/submit-form/{{currentWeek}}">
-                    <input type="text" id="name" name="name" placeholder="What do you want to do this week?"
+                    <input type="text" id="name" name="name" placeholder="What do you need to do this week?"
                         autocomplete="off" autofocus>
                     <input class="test" type="submit" value="Submit" />
                 </form>
@@ -212,6 +216,16 @@
                 </div>
             </div>
         </div>
+
+        <div class="help-screen-wrapper">
+            <span class="screen-cover"></span>
+            <div class="help-info-wrapper">
+                <h1>HELP</h1>
+                <h1>HELP</h1>
+                <h1>HELP</h1>
+                <h1>HELP</h1>
+            </div>
+        </div>
     </div>
 </body>
 <script>
@@ -224,19 +238,20 @@
     })
 
     // Use to check if dropdown is open
-    var isOpen = false;
+    var dropdownIsOpen = false;
     // Close dropdown if clicked outside of div
     $(document).mouseup(function (e) {
         var container = $(".dropdown-menu");
         if (!container.is(e.target) && container.has(e.target).length === 0) {
             container.hide();
-            isOpen = false;
+            dropdownIsOpen = false;
         }
     });
+
     // Open dropdown if btn clicked
     $("#dropdown-menu-btn").on("click", () => {
-        isOpen ? $('.dropdown-menu').hide() : $('.dropdown-menu').show()
-        isOpen = !isOpen;
+        dropdownIsOpen ? $('.dropdown-menu').hide() : $('.dropdown-menu').show()
+        dropdownIsOpen = !dropdownIsOpen;
     })
 
     // Show all 52 weeks of the year in dropdrown menu
@@ -249,6 +264,22 @@
     var url = window.location.pathname
     var myString = url.split('/')[2];
     $("#dropdown-menu-btn #btn-text").text("Week " + myString);
+
+    infoIsOpen = false;
+    // Info
+    $(".info-icon").on("click", () => {
+        $(".help-screen-wrapper").show();
+        infoIsOpen = true;
+    })
+
+    $(document).mouseup(function (e) {
+        var container = $(".help-info-wrapper");
+        if (!container.is(e.target) && container.has(e.target).length === 0 && infoIsOpen == true) {
+            $(".help-screen-wrapper").hide();
+            infoIsOpen = false;
+        }
+    });
+
 </script>
 
 </html>
