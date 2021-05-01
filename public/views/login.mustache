@@ -14,30 +14,31 @@
             </div>
 
             <div class="reg-form">
-                <form action="signup" method="post">
+                <form action="login" method="post">
+                    {{! Email }}
                     <div class="form-group">
                         {{! <label for="email">Username</label> }}
                         <input type="username" name="username" id="username" placeholder="Username">
                     </div>
-
+                    {{! Password }}
                     <div class="form-group">
                         {{! <label for="email">Password</label> }}
                         <input type="password" name="password" id="password" placeholder="Password">
                     </div>
-
-                    <input type="submit" name="" id="" value="Sign Up">
+                    {{! Submit }}
+                    <input type="submit" name="" id="" value="Login">
                 </form>
             </div>
 
             <div class="reg-other">
                 <a href="/">Need help?</a>
-                
                 <span>
                    <p>New to FitTracker?</p> <a href="/signup">Signup</a>
                 </span>
             </div>
         </div>
     </div>
+
     <script>
         // Remove active link from nav
         $('#active').removeAttr('id')

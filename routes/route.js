@@ -11,9 +11,12 @@ router.get('/', controller.renderIndex)
 router.get('/signup', controller.signup)
 router.get('/login', controller.login)
 
+router.post('/signup', function (req, res) {
+  res.send('HEOEHO')
+})
+
 // Dashboard //
 router.get('/dashboard', controller.currentWeek)
-
 router.get('/dashboard/:currentWeek', controller.dashboard)
 // Add new goal
 router.get('/new/:currentWeek', controller.addGoal)

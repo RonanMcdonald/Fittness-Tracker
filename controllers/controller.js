@@ -14,7 +14,6 @@ exports.currentWeek = (req, res) => {
 }
 
 exports.dashboard = async (req, res) => {
-  const today = new moment()
   const currentWeek = Number(req.params.currentWeek)
   await db.getAllGoals(currentWeek).then((data) => {
     res.render('dashboard', {
