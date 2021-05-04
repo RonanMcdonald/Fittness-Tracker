@@ -116,13 +116,13 @@ class pList {
         weekNumber: 13,
       },
     ]
-
     names.forEach((value) => {
       this.db.insert({
+        userID: '6IqjJXe7ZuEdVv3u',
         name: value.name, // task or goal name
         isComplete: value.isComplete, // is complete check
-        isPersistent: value.isPersistent, // true == goal | false == task
-        goal: value.goal, // goal occurence aim
+        isPersistent: value.isPersistent, // true == goal || false == task
+        goal: value.goal, // goal aim
         current: value.current, // goal current progress
         weekNumber: value.weekNumber, // which week created
       })
@@ -145,31 +145,22 @@ class pList {
   }
 
   // Specific
+  // Add goal
   addPersistentGoal(goal) {
-    var entry = {
-      name: goal.name,
-      goal: goal.goal,
-      current: goal.current,
-      isComplete: goal.isComplete,
-      isPersistent: goal.isPersistent,
-    }
-
-    console.log('entry created', entry)
-    this.db.insert(entry, function (err, doc) {
+    console.log('entry created', goal)
+    this.db.insert(goal, function (err, doc) {
       err ? onsole.log('Error inserting object', subject) : console.log('object inserted in database', doc)
     })
   }
 
   // Get all goals
-  getAllGoals(weekNumber) {
+  getAllGoals(weekNumber, userID) {
+    // var userID = '6IqjJXe7ZuEdVv3u'
     return new Promise((resolve, reject) => {
       console.log('Locating: Week', weekNumber)
-      this.db
-        .find({ $or: [{ weekNumber: weekNumber }, { isPersistent: true }] })
-        .sort({})
-        .exec((err, entries) => {
-          err ? reject(err) : resolve(entries)
-        })
+      this.db.find({ $and: [{ $or: [{ weekNumber: weekNumber }, { isPersistent: true }], userID }] }).exec((err, entries) => {
+        err ? reject(err) : resolve(entries)
+      })
     })
   }
 
@@ -189,15 +180,8 @@ class pList {
 
   // --- TASKS ---- //
   addTask(task) {
-    var entry = {
-      name: task.name,
-      isComplete: task.isComplete,
-      isPersistent: task.isPersistent,
-      weekNumber: task.weekNumber,
-    }
-
-    console.log('entry created', entry)
-    this.db.insert(entry, function (err, doc) {
+    console.log('entry created', task)
+    this.db.insert(task, function (err, doc) {
       err ? onsole.log('Error inserting object', subject) : console.log('object inserted in database', doc)
     })
   }
@@ -217,6 +201,16 @@ class pList {
   retractCompleteTask(id) {
     this.db.update({ _id: id }, { $set: { isComplete: false } }, (err, numUpdated) => {
       err ? console.log(`Error updating task: ${id}`) : console.log(`${numUpdated} task updated in database`)
+    })
+  }
+
+  // DEBUG
+  getAllGoalsNew(userID) {
+    return new Promise((resolve, reject) => {
+      console.log('MODEL:', userID)
+      this.db.find({ userID }).exec((err, entries) => {
+        err ? reject(err) : resolve(entries)
+      })
     })
   }
 }

@@ -1,12 +1,22 @@
+var Datastore = require('nedb')
+var users = new Datastore({ filename: '/bin/users.db', autoload: true })
+var jwt = require('jsonwebtoken')
+var bcrypt = require('bcrypt')
+var config = require('../config')
+// User DAO
+
+// Task DAO
 const modelDAO = require('../models/model')
 const db = new modelDAO()
+db.init()
 
 // Time object: enables getting of current time/dates
 const moment = require('moment')
 const { reset } = require('nodemon')
 const e = require('express')
+const { compareSync } = require('bcrypt')
 
-db.init()
+// DASHBOARD //
 
 exports.currentWeek = (req, res) => {
   const currentWeek = moment().isoWeek()
@@ -15,7 +25,8 @@ exports.currentWeek = (req, res) => {
 
 exports.dashboard = async (req, res) => {
   const currentWeek = Number(req.params.currentWeek)
-  await db.getAllGoals(currentWeek).then((data) => {
+  const userID = req.cookies.cookie.userID
+  await db.getAllGoals(currentWeek, userID).then((data) => {
     res.render('dashboard', {
       activePersistentGoals: data.filter((goal) => goal.isComplete === false && goal.isPersistent === true),
       completedPersistentGoals: data.filter((goal) => goal.isComplete === true && goal.isPersistent === true),
@@ -28,6 +39,7 @@ exports.dashboard = async (req, res) => {
       currentWeek: currentWeek,
       nextWeek: currentWeek + 1,
       previousWeek: currentWeek - 1,
+      username: req.cookies.cookie.userName,
     })
   })
 }
@@ -56,6 +68,7 @@ exports.post_new_entry = function (req, res) {
     current: 0,
     isComplete: false,
     isPersistent: true,
+    userID: req.cookies.cookie.userID,
   }
 
   db.addPersistentGoal(goalObject)
@@ -96,6 +109,7 @@ exports.addTask = async function (req, res) {
     isComplete: false,
     isPersistent: false,
     weekNumber: Number(req.params.currentWeek),
+    userID: req.cookies.cookie.userID,
   }
 
   db.addTask(taskObject)
@@ -147,14 +161,123 @@ exports.prevWeek = async function (req, res) {
   res.redirect(req.baseUrl + '/dashboard/' + newWeek)
 }
 
-exports.renderIndex = async function (req, res) {
-  res.render('index')
-}
-
+// ACCOUNT //
 exports.signup = async function (req, res) {
   res.render('signup')
 }
 
 exports.login = async function (req, res) {
-  res.render('login')
+  console.log(req.cookies.cookie.token)
+  if (req.cookies.cookie.token != null) {
+    res.redirect('/dashboard')
+  } else {
+    res.render('login')
+  }
+}
+
+exports.newUser = function (req, res) {
+  console.log('\nNew User')
+
+  var hashedPassword = bcrypt.hashSync(req.body.password, 8)
+  users.insert(
+    {
+      username: req.body.username,
+      password: hashedPassword,
+    },
+    function (err, user) {
+      if (err) {
+        return res.redirect('/signup')
+      }
+    }
+  )
+  res.redirect('/login')
+}
+
+exports.loginUser = function (req, res) {
+  console.log('\nLogin User:')
+
+  users.findOne({ username: req.body.username }, function (err, user) {
+    if (err) {
+      return res.status(200).send('Server error encountered')
+    }
+
+    if (!user) {
+      return res.status(404).send('User not found')
+    }
+
+    if (!bcrypt.compareSync(req.body.password, user.password)) {
+      return res.status(401).send({
+        auth: false,
+        token: null,
+      })
+    }
+
+    jwt.sign({ user }, 'secretkey', (err, token) => {
+      const userID = user._id
+      const userName = user.username
+      console.log(token)
+      res.cookie('cookie', { token, userID, userName })
+      res.redirect('/dashboard')
+      // res.json({
+      //   token,
+      //   user,
+      // })
+    })
+  })
+}
+
+exports.logout = async function (req, res) {
+  res.cookie('cookie', { token: null, userID: null, userName: null })
+  res.redirect('/')
+}
+
+exports.authenticateToken = async function (req, res, next) {
+  console.log('\nAuth Token:')
+
+  const authHeader = req.headers['authorization']
+  const token = req.cookies.cookie.token // Previous code: authHeader && authHeader.split(' ')[1]
+
+  console.log('Token', req.cookies.cookie.token)
+  console.log('userID', req.cookies.cookie.userID)
+
+  if (token == null) return res.sendStatus(401)
+
+  jwt.verify(token, 'secretkey', () => {
+    next()
+  })
+}
+
+// ADMIN //
+exports.getAllUsers = async function (req, res) {
+  await users.find({}, (err, data) => {
+    res.status(200).send({
+      users: data,
+    })
+  })
+}
+
+exports.getAllUsersData = async function (req, res) {
+  console.log('\nGet Data:')
+
+  const userID = req.cookies.cookie.userID
+  const userName = req.cookies.cookie.userName
+
+  console.log('userID', userID)
+  console.log('userID', userName)
+
+  await db.getAllGoalsNew(userID).then((data) => {
+    res.status(200).send({
+      data,
+    })
+  })
+}
+
+// INDEX PAGE //
+exports.renderIndex = async function (req, res) {
+  res.render('index')
+}
+
+// ACCOUNT //
+exports.account = async (req, res) => {
+  res.render('account')
 }

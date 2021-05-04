@@ -7,25 +7,7 @@
 
 <body>
     <div class="dashboard-wrapper">
-        <div class="m-col-1">
-            <div class="logo-wrapper">
-                <a href="/"><img src="../style/img/icons/logo.svg" alt=""></a>
-            </div>
-
-            <div class="page-links">
-                <a href=""><img src="../style/img/icons/home.svg" alt=""></a>
-                <a href=""><img src="../style/img/icons/account.svg" alt=""></a>
-                <a href=""><img src="../style/img/icons/friends.svg" alt=""></a>
-                <a href=""><img src="../style/img/icons/sharelink.svg" alt=""></a>
-                <a href=""><img src="../style/img/icons/logout.svg" alt=""></a>
-            </div>
-
-            <div class="info-container">
-                <div class="info-icon">
-                    <img src="../style/img/icons/info.svg" alt="">
-                </div>
-            </div>
-        </div>
+        {{>partials/dash_navigation}}
 
         <div class="m-col-2">
             <div class="account-wrapper">
@@ -33,7 +15,7 @@
                     <img src="../style/img/icons/account-placeholder.svg" alt="">
                 </div>
                 <div class="account-name">
-                    <p>Adam Brown</p>
+                    <p id="username">{{username}}</p>
                 </div>
             </div>
 
@@ -46,11 +28,16 @@
                             <!-- <img src="../style/img/icons/drop-arrow.svg" alt=""> -->
                         </div>
                     </div>
-                    <div class="g-total">
+                    {{! <div class="g-total">
                         <h2>Active:</h2>
                         <h2 id="total-active">0</h2>
-                    </div>
+                    </div> }}
                     <div class="wrapper">
+                        {{^activePersistentGoals}}
+                        <div class="placeholder-text">
+                            <p>Set your own long-term goals!</p>
+                        </div>
+                        {{/activePersistentGoals}}
                         {{#activePersistentGoals}}
                         <div class="goal-container">
                             <div class="text-wrapper">
@@ -78,9 +65,6 @@
                     <div class="add-goal-wrapper">
                         <a href="/new/{{currentWeek}}">Add Goal</a>
                     </div>
-                    {{^activePersistentGoals}}
-                    <p>Set your own long-term goals!</p>
-                    {{/activePersistentGoals}}
                 </div>
 
                 <!-- Completed Goals -->
@@ -216,16 +200,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="help-screen-wrapper">
-            <span class="screen-cover"></span>
-            <div class="help-info-wrapper">
-                <h1>HELP</h1>
-                <h1>HELP</h1>
-                <h1>HELP</h1>
-                <h1>HELP</h1>
-            </div>
-        </div>
     </div>
 </body>
 <script>
@@ -279,7 +253,6 @@
             infoIsOpen = false;
         }
     });
-
 </script>
 
 </html>

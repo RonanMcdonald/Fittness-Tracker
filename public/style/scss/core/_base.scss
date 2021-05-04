@@ -72,6 +72,7 @@
   width: fit-content;
   min-height: 100vh;
   max-height: 100vh;
+  min-width: 334px;
   background-color: white;
   position: relative;
   overflow: hidden;
@@ -80,7 +81,8 @@
   border-right: 2px solid #edeef1;
 
   .goal-tracker {
-    padding: 15px 12.5px 15px 15px;
+    padding: 15px;
+    min-width: 300px;
   }
 
   .account-wrapper {
@@ -103,8 +105,17 @@
     }
 
     .account-name {
-      margin-left: 20px;
+      margin-left: 15px;
       font-size: 24px;
+      max-width: 250px;
+      width: 100%;
+      height: 36px;
+      overflow: hidden;
+
+      position: relative;
+      p {
+        position: absolute;
+      }
     }
   }
 
@@ -119,7 +130,7 @@
     position: relative;
 
     h1 {
-      font-size: 24px;
+      font-size: 28px;
     }
 
     h2 {
@@ -135,6 +146,11 @@
       justify-content: space-between;
       align-items: center;
 
+      border-bottom: 2px solid #edeef1;
+      padding-bottom: 2.5px;
+      margin-bottom: 10px;
+      color: $primary;
+
       .dropdown-toggle {
         img {
           width: 100%;
@@ -145,7 +161,7 @@
 
     .goal-container {
       width: 300px;
-      padding: 4px 12px;
+      // padding: 4px 12px;
       position: relative;
 
       .text-wrapper {
@@ -164,6 +180,14 @@
         .increment,
         .decrement {
           margin-bottom: -4.5px;
+          opacity: 0.5;
+          filter: grayscale(40%);
+        }
+
+        .increment:hover,
+        .decrement:hover {
+          opacity: 1;
+          filter: grayscale(0%);
         }
 
         .increment {
@@ -172,7 +196,7 @@
 
         .decrement {
           transform: rotate(0);
-          margin-right: 5px;
+          margin-right: 3px;
         }
       }
 
@@ -196,35 +220,46 @@
         a {
           text-decoration: none;
           color: black;
+          opacity: 0.5;
+        }
+
+        a:hover {
+          opacity: 1;
         }
       }
     }
 
-    .wrapper {
-      overflow: hidden;
+    .placeholder-text {
+      text-align: center;
     }
 
-    .goal-container::before {
-      content: '';
-      width: 2.5px;
-      height: 100%;
-      position: absolute;
-      left: 2px;
-      background-color: #633fdbab;
+    .add-goal-wrapper {
+      text-align: center;
     }
 
-    .wrapper .goal-container:last-child::before {
-      height: 80%;
-    }
+    // .goal-container::before {
+    //   content: '';
+    //   width: 2.5px;
+    //   height: 100%;
+    //   position: absolute;
+    //   left: 2px;
+    //   background-color: #633fdbab;
+    // }
 
-    .wrapper .goal-container:last-of-type::before {
-      height: 80%;
-    }
+    // .wrapper .goal-container:last-child::before {
+    //   height: 80%;
+    // }
+
+    // .wrapper .goal-container:last-of-type::before {
+    //   height: 80%;
+    // }
 
     .g-total {
       display: flex;
       justify-content: space-between;
-      padding-right: 12px;
+      margin-bottom: 5px;
+      margin-top: -2.5px;
+
       h2 {
         font-size: 18px;
       }

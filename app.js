@@ -3,7 +3,7 @@ const app = express()
 const path = require('path')
 const bodyParser = require('body-parser')
 
-// Front-End LiveReload.
+// LiveReload START
 var publicDirectory = __dirname + '/public'
 const connectLiveReload = require('connect-livereload')
 var livereload = require('livereload')
@@ -15,6 +15,10 @@ liveReloadServer.server.once('connection', () => {
   }, 8)
 })
 app.use(connectLiveReload())
+// LiveReload END
+
+const cookieParser = require('cookie-parser')
+app.use(cookieParser())
 
 app.use(express.urlencoded({ extended: true }))
 

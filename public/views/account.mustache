@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{>partials/head}}
+  <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script>
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <div class="m-col-1">
+      {{>partials/dash_navigation}}
+    </div>
+
+    <div class="o-col-1">
+      <div class="col-title">
+          <p>Account</p>
+      </div>
+      <div class="col-body">
+        {{! Profile }}
+        <div class="item-container">
+          <div class="item-title">
+            <img src="" alt="">
+            <p>Profile</p>
+          </div>
+          
+          <div class="item-body">
+            <form action="/updateProfile" method="post" role="form">
+              <div class="form-group">
+                <label for="name">Email</label>
+                <input type="text" id="name" name="name" placeholder="Enter the goal name" required>
+              </div>
+              <div class="form-group">
+                <label for="amount">Username</label>
+                <input type="text" id="amount" name="amount" placeholder="Enter a goal amount" required>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Save Changes">
+              </div>
+            </form>
+          </div>
+        </div>
+        {{! Share Link }}
+        <div class="item-container">
+          <div class="item-title">
+            <img src="" alt="">
+            <p>Share Link</p>
+          </div>
+          <div class="item-body">
+            <div class="share-container">
+              <button onclick="myFunction()">Copy</button>
+              <p type="text" value="https://fit-tracker/visit/bob#9984" id="myInput">https://fit-tracker/visit/bob#9984</p>
+            </div>
+          </div>
+        </div>
+        {{! Friends }}
+        <div class="item-container">
+          <div class="item-title">
+            <img src="" alt="">
+            <p>Friends</p>
+          </div>
+          
+          <div class="item-body">
+            <form action="/updateProfile" method="post" role="form">
+              <div class="form-group">
+                {{! <label for="name">Name / Title</label>
+                <input type="text" id="name" name="name" placeholder="Enter the goal name" required>
+              </div>
+              <div class="form-group">
+                <label for="amount">Goal amount</label>
+                <input type="text" id="amount" name="amount" placeholder="Enter a goal amount" required>
+              </div> }}
+              <div class="form-group">
+                <input type="submit" value="Add Goal">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function myFunction() {
+    /* Get the text field */
+    var copyText = document.getElementById("myInput");
+
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
+
+    /* Alert the copied text */
+    alert("Copied the text: " + copyText.value);
+  }
+  </script>
+</body>
+</html>

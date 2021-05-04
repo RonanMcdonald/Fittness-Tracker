@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {{>partials/head}}
 </head>
+
 <body>
-    {{>partials/navigation}}
-    <!-- <div class="prev-goal-name">
-        <p>Previous Goal Name: {{name}}</p>
-    </div> -->
-    <form method="post" role="form">
-        <div class="form-group">
-            <label for="name">New goal name</label>
-            <input type="text" id="name" name="name" placeholder="Enter the goal name" required>
+    <div class="dashboard-wrapper">
+          <div class="m-col-1">
+            <div class="logo-wrapper">
+                <a href="/"><img src="../style/img/icons/logo.svg" alt=""></a>
+            </div>
+
+            <div class="page-links">
+                <a href=""><img src="../style/img/icons/home.svg" alt=""></a>
+                <a href=""><img src="../style/img/icons/account.svg" alt=""></a>
+                <a href=""><img src="../style/img/icons/friends.svg" alt=""></a>
+                <a href=""><img src="../style/img/icons/sharelink.svg" alt=""></a>
+                <a href=""><img src="../style/img/icons/logout.svg" alt=""></a>
+            </div>
+
+            <div class="info-container">
+                <div class="info-icon">
+                    <img src="../style/img/icons/info.svg" alt="">
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <input type="submit">
+        <div class="o-col-1">
+            <form method="post" role="form">
+                <div class="form-group">
+                    <label for="name">New goal name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter the goal name" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit">
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </body>
 </html>
