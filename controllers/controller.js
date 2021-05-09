@@ -1,5 +1,4 @@
 var Datastore = require('nedb')
-var users = new Datastore({ filename: '/bin/users.db', autoload: true })
 var jwt = require('jsonwebtoken')
 var bcrypt = require('bcrypt')
 var config = require('../config')
