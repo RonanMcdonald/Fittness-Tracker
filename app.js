@@ -3,18 +3,22 @@ const app = express()
 const path = require('path')
 const bodyParser = require('body-parser')
 
+var dev = false
+
 // LiveReload START
-var publicDirectory = __dirname + '/public'
-const connectLiveReload = require('connect-livereload')
-var livereload = require('livereload')
-var liveReloadServer = livereload.createServer()
-liveReloadServer.watch(publicDirectory)
-liveReloadServer.server.once('connection', () => {
-  setTimeout(() => {
-    liveReloadServer.refresh('/')
-  }, 8)
-})
-app.use(connectLiveReload())
+if (dev) {
+  var publicDirectory = __dirname + '/public'
+  const connectLiveReload = require('connect-livereload')
+  var livereload = require('livereload')
+  var liveReloadServer = livereload.createServer()
+  liveReloadServer.watch(publicDirectory)
+  liveReloadServer.server.once('connection', () => {
+    setTimeout(() => {
+      liveReloadServer.refresh('/')
+    }, 8)
+  })
+  app.use(connectLiveReload())
+}
 // LiveReload END
 
 const cookieParser = require('cookie-parser')
