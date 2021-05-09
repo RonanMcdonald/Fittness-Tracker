@@ -1414,6 +1414,49 @@ h2 {
           transform: scale(0.9);
 }
 
+.task {
+  position: relative;
+}
+
+.task p {
+  position: relative;
+  z-index: 2;
+}
+
+.task::before {
+  display: block;
+  width: 60px;
+  height: 8px;
+  position: absolute;
+  bottom: 7px;
+  content: '';
+  z-index: 1;
+}
+
+.cardio .task::before {
+  background-color: #00c2ff;
+  opacity: 0.4;
+}
+
+.strength .task::before {
+  background-color: #ff00e5;
+}
+
+.diet .task::before {
+  background-color: #ff0000;
+}
+
+.other .task::before {
+  background-color: #5200ff;
+}
+
+.cardio .task::before,
+.strength .task::before,
+.diet .task::before,
+.other .task::before {
+  opacity: 0.4;
+}
+
 body,
 html {
   background-color: white;

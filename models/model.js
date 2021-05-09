@@ -72,7 +72,7 @@ class pList {
         isPersistent: false,
         goal: 0,
         current: 0,
-        weekNumber: 11,
+        tag: 'diet',
       },
       {
         name: 'Do 20 push ups',
@@ -80,7 +80,7 @@ class pList {
         isPersistent: false,
         goal: 0,
         current: 0,
-        weekNumber: 12,
+        tag: 'other',
       },
       {
         name: 'Go for a run',
@@ -88,7 +88,7 @@ class pList {
         isPersistent: false,
         goal: 0,
         current: 0,
-        weekNumber: 13,
+        tag: 'diet',
       },
       {
         // Tasks : Complete
@@ -97,7 +97,7 @@ class pList {
         isPersistent: false,
         goal: 0,
         current: 0,
-        weekNumber: 11,
+        tag: 'other',
       },
       {
         name: 'Dance',
@@ -105,7 +105,7 @@ class pList {
         isPersistent: false,
         goal: 0,
         current: 0,
-        weekNumber: 12,
+        tag: 'cardio',
       },
       {
         name: 'Do 10 pull ups',
@@ -113,7 +113,7 @@ class pList {
         isPersistent: false,
         goal: 0,
         current: 0,
-        weekNumber: 13,
+        tag: 'strength',
       },
     ]
     names.forEach((value) => {
@@ -124,7 +124,8 @@ class pList {
         isPersistent: value.isPersistent, // true == goal || false == task
         goal: value.goal, // goal aim
         current: value.current, // goal current progress
-        weekNumber: value.weekNumber, // which week created
+        weekNumber: 18, // which week created
+        tag: value.tag,
       })
     })
   }

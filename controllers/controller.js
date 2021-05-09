@@ -17,7 +17,6 @@ const e = require('express')
 const { compareSync } = require('bcrypt')
 
 // DASHBOARD //
-
 exports.currentWeek = (req, res) => {
   const currentWeek = moment().isoWeek()
   res.redirect(`dashboard/${currentWeek}`)
@@ -40,6 +39,7 @@ exports.dashboard = async (req, res) => {
       nextWeek: currentWeek + 1,
       previousWeek: currentWeek - 1,
       username: req.cookies.cookie.userName,
+      tag: data.tag,
     })
   })
 }
@@ -104,12 +104,18 @@ exports.addTask = async function (req, res) {
     return res.redirect(req.baseUrl + '/')
   }
 
+  console.log('\n\n')
+  console.log('THING THING THING')
+  console.log(req.body.hiddenField)
+  console.log('\n\n')
+
   const taskObject = {
     name: req.body.name,
     isComplete: false,
     isPersistent: false,
     weekNumber: Number(req.params.currentWeek),
     userID: req.cookies.cookie.userID,
+    tag: req.body.hiddenField,
   }
 
   db.addTask(taskObject)
@@ -218,10 +224,6 @@ exports.loginUser = function (req, res) {
       console.log(token)
       res.cookie('cookie', { token, userID, userName })
       res.redirect('/dashboard')
-      // res.json({
-      //   token,
-      //   user,
-      // })
     })
   })
 }
@@ -262,9 +264,6 @@ exports.getAllUsersData = async function (req, res) {
   const userID = req.cookies.cookie.userID
   const userName = req.cookies.cookie.userName
 
-  console.log('userID', userID)
-  console.log('userID', userName)
-
   await db.getAllGoalsNew(userID).then((data) => {
     res.status(200).send({
       data,
@@ -274,6 +273,11 @@ exports.getAllUsersData = async function (req, res) {
 
 // INDEX PAGE //
 exports.renderIndex = async function (req, res) {
+  console.log('\n\n\n')
+  if (typeof req.cookies.cookie != 'undefined') {
+    res.cookie('cookie', { token: null, userID: null, userName: null })
+  }
+
   res.render('index')
 }
 

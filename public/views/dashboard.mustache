@@ -143,15 +143,16 @@
             </div>
 
             <div class="main-wrapper">
-                <form class="form-wrapper" method="POST" action="/submit-form/{{currentWeek}}">
+                <form class="form-wrapper" method="POST" onSubmit="applyFormTag()" action="/submit-form/{{currentWeek}}">
                     <input type="text" id="name" name="name" placeholder="What do you need to do this week?"
-                        autocomplete="off" autofocus>
+                        autocomplete="off" autofocus required>
+                    <input type='hidden' id='hiddenField' name='hiddenField' value='other' />
                     <input class="test" type="submit" value="Submit" />
                 </form>
 
                 <div class="tag-wrapper">
                     <div class="tag active" id="all"><span></span><span>All</span></div>
-                    <div class="tag" id="cardio"><span></span><span>Cardio</span></div>
+                    <div class="tag" id="cardio" value="2"><span></span><span>Cardio</span></div>
                     <div class="tag" id="strength"><span></span><span>Strength</span></div>
                     <div class="tag" id="diet"><span></span><span>Diet</span></div>
                     <div class="tag" id="other"><span></span><span>Other</span></div>
@@ -160,7 +161,7 @@
                 <div class="list-wrapper">
                     <ul>
                         {{#activeRecurring}}
-                        <li>
+                        <li class="tagged-item {{tag}}">
                             <div class="check-circle">
                                 <a href="/complete/{{_id}}/{{currentWeek}}"><img src="../style/img/icons/circle-def.png"
                                         width="100" height="100"></a>
@@ -182,7 +183,7 @@
                         </ul>
                         {{/activeRecurring}}
                         {{#completedRecurring}}
-                        <li>
+                        <li class="tagged-item {{tag}}">
                             <div class="check-circle">
                                 <a href="/retractCompleteTask/{{_id}}/{{currentWeek}}"><img
                                         src="../style/img/icons/circle-check.png" width="100" height="100"></a>
@@ -239,20 +240,23 @@
     var myString = url.split('/')[2];
     $("#dropdown-menu-btn #btn-text").text("Week " + myString);
 
-    infoIsOpen = false;
-    // Info
-    $(".info-icon").on("click", () => {
-        $(".help-screen-wrapper").show();
-        infoIsOpen = true;
-    })
+    // Set tag currently selected inside task submit form
+    $(".tag").on("click", function() {
+        var clickedTag = this;
+        // Change active button
+        $(".tag").removeClass("active");
+        $(clickedTag).addClass("active");
 
-    $(document).mouseup(function (e) {
-        var container = $(".help-info-wrapper");
-        if (!container.is(e.target) && container.has(e.target).length === 0 && infoIsOpen == true) {
-            $(".help-screen-wrapper").hide();
-            infoIsOpen = false;
+        // Change shown task items
+        $(".tagged-item").hide()
+        if ($(clickedTag).attr("id") != "all") {
+            $(".tagged-item." + $(clickedTag).attr("id")).show()
+            $("#hiddenField").val($(clickedTag).attr("id"))
+        } else {
+            $(".tagged-item").show()
+            $("#hiddenField").val("other")
         }
-    });
+    })
 </script>
 
 </html>
