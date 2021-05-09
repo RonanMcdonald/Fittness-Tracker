@@ -3,23 +3,23 @@ const app = express()
 const path = require('path')
 const bodyParser = require('body-parser')
 
-var dev = false
+// var dev = false
 
-// LiveReload START
-if (dev) {
-  var publicDirectory = __dirname + '/public'
-  const connectLiveReload = require('connect-livereload')
-  var livereload = require('livereload')
-  var liveReloadServer = livereload.createServer()
-  liveReloadServer.watch(publicDirectory)
-  liveReloadServer.server.once('connection', () => {
-    setTimeout(() => {
-      liveReloadServer.refresh('/')
-    }, 8)
-  })
-  app.use(connectLiveReload())
-}
-// LiveReload END
+// // LiveReload START
+// if (dev) {
+//   var publicDirectory = __dirname + '/public'
+//   const connectLiveReload = require('connect-livereload')
+//   var livereload = require('livereload')
+//   var liveReloadServer = livereload.createServer()
+//   liveReloadServer.watch(publicDirectory)
+//   liveReloadServer.server.once('connection', () => {
+//     setTimeout(() => {
+//       liveReloadServer.refresh('/')
+//     }, 8)
+//   })
+//   app.use(connectLiveReload())
+// }
+// // LiveReload END
 
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
@@ -48,5 +48,5 @@ app.use('/', routes)
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT, function () {
-  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.')
+  // console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.')
 })
