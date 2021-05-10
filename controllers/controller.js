@@ -173,7 +173,10 @@ exports.signup = async function (req, res) {
 }
 
 exports.login = async function (req, res) {
-  console.log(req.cookies.cookie.token)
+  if (typeof req.cookies.cookie == 'undefined') {
+    res.cookie('cookie', { token: null, userID: null, userName: null })
+  }
+
   if (req.cookies.cookie.token != null) {
     res.redirect('/dashboard')
   } else {
@@ -273,8 +276,7 @@ exports.getAllUsersData = async function (req, res) {
 
 // INDEX PAGE //
 exports.renderIndex = async function (req, res) {
-  console.log('\n\n\n')
-  if (typeof req.cookies.cookie != 'undefined') {
+  if (typeof req.cookies.cookie == 'undefined') {
     res.cookie('cookie', { token: null, userID: null, userName: null })
   }
 

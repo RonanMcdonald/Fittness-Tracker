@@ -48,5 +48,5 @@ app.use('/', routes)
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT, function () {
-  // console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.')
+  console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 })
