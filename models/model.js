@@ -173,8 +173,15 @@ class pList {
   }
 
   // Increment
-  updateIncrement(id, current, isComplete) {
+  updateIncrement(id, current) {
     this.db.update({ _id: id }, { $set: { current: current + 1 } }, (err, numUpdated) => {
+      err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in database`)
+    })
+  }
+
+  // Complete goal
+  completeGoal(id, total) {
+    this.db.update({ _id: id }, { $set: { isComplete: true, current: total } }, (err, numUpdated) => {
       err ? console.log(`Error updating goal: ${id}`) : console.log(`${numUpdated} Goal updated in database`)
     })
   }

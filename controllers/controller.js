@@ -79,7 +79,11 @@ exports.post_new_entry = function (req, res) {
 exports.decrement = async function (req, res) {
   const id = req.params._id
   const goal = await db.getGoalById(id)
-  await db.updateDecrement(goal._id, goal.current)
+  if (goal.current < 2) {
+    db.completeGoal(id, goal.goal)
+  } else {
+    await db.updateDecrement(goal._id, goal.current)
+  }
   res.redirect(req.baseUrl + '/dashboard/' + req.params.currentWeek)
 }
 
@@ -88,9 +92,8 @@ exports.increment = async function (req, res) {
   const id = req.params._id
   const goal = await db.getGoalById(id)
 
-  // NOT WORKING, NEED TO UPDATE: WAS SUPPOSED TO BE BOUNDRY HANDLING
-  if (goal.current + 1 == goal.goal) {
-    await db.updateIncrement(goal._id, goal.current)
+  if (goal.current >= goal.goal - 1) {
+    db.completeGoal(id, goal.goal)
   } else {
     await db.updateIncrement(goal._id, goal.current)
   }
@@ -237,13 +240,13 @@ exports.logout = async function (req, res) {
 }
 
 exports.authenticateToken = async function (req, res, next) {
-  console.log('\nAuth Token:')
+  // console.log('\nAuth Token:')
 
   const authHeader = req.headers['authorization']
   const token = req.cookies.cookie.token // Previous code: authHeader && authHeader.split(' ')[1]
 
-  console.log('Token', req.cookies.cookie.token)
-  console.log('userID', req.cookies.cookie.userID)
+  // console.log('Token', req.cookies.cookie.token)
+  // console.log('userID', req.cookies.cookie.userID)
 
   if (token == null) return res.sendStatus(401)
 
